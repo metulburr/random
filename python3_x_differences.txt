@@ -1,0 +1,59 @@
+3.x Removed 			3.x Replacement
+---------------------------------------------------------------
+reload(M) 			imp.reload(M) (or exec)
+apply(f, ps, ks)		f(*ps, **ks)
+'X' 				repr(X)
+X <> Y				x != Y
+long				int
+9999L				9999
+D.has_key(K)			K in D(or D.get(key) != None)
+raw_input(K)			input(K)
+old input			eval(input())
+xrange				range
+file				open(and io module classes)
+X.next				X.__next__,called by next(X)
+X.__getslice__			X.__getitem__ passed a slice object
+X.__setslice__			X.__setitem__ passed a slice object
+reduce				functools.reduce(or loop code)
+execfile(filename)		exec(open(filename).read())
+exec open(filename)		exec(open(filename).read())
+0777				0o777
+print x, y			print(x, y)
+print >> F, x, y		print(x, y, file=F)
+print x, y,			print(x, y, end=' ')
+u'ccc'				'ccc'
+'bbb' for byte strings		b'bbb'
+raise E, V			raiseE(V)
+except E, V:			except E as X:
+def f((a, b)):			def f(x): (a, b) = x
+file.xreadlines			for line in file: (or X=iter(file))
+D.keys, etc. as lists		list(D.keys()) (dictionary views)
+map(), range, etc. as lists	list(map()), list(range()) (built-ins)
+map(None, ...)			zip(or manuel code to pad results)
+X=D.keys(); X.sort()		sorted(D) (or list(D.keys()))
+cmp(x, y)			(x > y) - (x < y)
+X.__cmp__(y)			__lt__, __gt__, __eq__, etc.
+X.__nonzero__			X.__bool__
+X.__hex__, X.__oct__		X.__index__
+sort comparison functions	Use key=transform or reverse=True
+Dictionary <, >, <=, >=		compare sorted(D.items()) (or loop code)
+types.ListType			list(types is for nonbuilt-in names only)
+__metaclass__ = M		class C(metaclass=M):
+__builtin__			builtins (renamed)
+Tkinter				tkinter (renamed)
+sys.exc_type, exc_value		sys.exc_info()[0], [1]
+function.func_code		function.__code__
+__getattr__ run by built-ins	Redefine __X__ methods in wrapper classes
+-t, -tt command-line switches	inconsistant tabs/spaces use is always an error
+from ... *, within a function	May only appear at the top level of a file
+import mod, in same package	from . import mod, package=relative form
+class MyException 		class MyException(Exception)
+exceptions module		built-in scope, library manual
+thread, Queue modules		_thread, queue (both renamed)
+anydbm module			dbm(renamed)
+cPickle module			_pickle (renamed, used automatically)
+os.popen2/3/4			subprocess.Popen (os.popen retained)
+String-based exceptions		Class-based exceptions (also required in 2.6)
+String module functions		String object methods
+Unbound methods			Functions (staticmethod to call via instance)
+Mixed type comparisons, sorts	Nonnumeric mixted type comparisons are errors
