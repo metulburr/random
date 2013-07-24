@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include <cstdlib> //randint
@@ -65,6 +64,13 @@ class Utility{
             }
             return mn;
         }
+        int sum(int a[], int size){
+            int total = 0;
+            for(int i=0; i<size; i++){
+                total += a[i];
+            }
+            return total;
+        }
         
         int max(vector<int> v){
             int mx = v[0];
@@ -84,7 +90,13 @@ class Utility{
             }
             return mn;
         }
-        
+        int sum(vector<int> v){
+            int total = 0;
+            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+                total += v[i];
+            }
+            return total;
+        }
         
         
     //file i/o
@@ -207,7 +219,7 @@ void test(){
     cout << endl;
     cout << "max num: " << util.max(a, 10) << endl;
     cout << "max num: " << util.min(a, 10) << endl;
-    
+    cout << "sum: " << util.sum(a, 10) << endl;
     
     vector<int> v;
     for (int i=0; i<util.randint(3,10); i++){
@@ -217,9 +229,9 @@ void test(){
         cout << v[i] << ' ';
     }
     cout << endl;
-    cout << util.max(v) << endl;
-    cout << util.min(v) << endl;
-    
+    cout << "max num: " << util.max(v) << endl;
+    cout << "min num: " << util.min(v) << endl;
+    cout << "sum: " << util.sum(v) << endl;
     
     string name = "test.html";
     util.write(name, "some\nrandom\ndata");
@@ -235,6 +247,8 @@ void test(){
     cout << util.str2cha("s") + 'h' << endl;
     cout << util.cha2asc('c') << endl;
     cout << util.asc2cha(99) << endl;
+
+    
 }
 
 
