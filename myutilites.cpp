@@ -41,6 +41,25 @@ class Utility{
         string reverse(string s){
             return string(s.rbegin(), s.rend());
         }
+        
+        int max(int a[], int size){
+            int mx = a[0];
+            for(int i=0; i<size; i++){
+                if(mx < a[i]){
+                    mx = a[i];
+                }
+            }
+            return mx;
+        }
+        int min(int a[], int size){
+            int mn = a[0];
+            for(int i=0; i<size; i++){
+                if(mn > a[i]){
+                    mn = a[i];
+                }
+            }
+            return mn;
+        }
 
 };
 
@@ -49,10 +68,12 @@ void test(){
 
     Utility util;
     
+    
     for (int i=0; i<10; i++){
         cout << util.randint(5, 25) << ' ';
     }
     cout << endl;
+    
     
     string gender[2] = {"Female", "Male"};
     for (int i=0; i<10; i++){
@@ -60,10 +81,24 @@ void test(){
     }
     cout << endl;
     
+    
     cout << util.reverse("some random string") << endl;
+    
+    
+    int a[10];
+    for (int i=0; i<10; i++){
+        a[i] = util.randint(0,25);
+        cout << a[i] << ' ';
+    }
+    cout << endl;
+    cout << "max num: " << util.max(a, 10) << endl;
+    cout << "max num: " << util.min(a, 10) << endl;
 
 }
 
-int main(){
+
+
+
+int main (){
     test();
 }
