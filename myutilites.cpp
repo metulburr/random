@@ -2,6 +2,7 @@
 
 #include <cstdlib> //randint
 #include <ctime> //randint
+#include <vector>
 using namespace std;
 
 
@@ -60,6 +61,25 @@ class Utility{
             }
             return mn;
         }
+        
+        int max(vector<int> v){
+            int mx = v[0];
+            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+                if(mx < v[i]){
+                    mx = v[i];
+                }
+            }
+            return mx;
+        }
+        int min(vector<int> v){
+            int mn = v[0];
+            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+                if(mn > v[i]){
+                    mn = v[i];
+                }
+            }
+            return mn;
+        }
 
 };
 
@@ -93,6 +113,18 @@ void test(){
     cout << endl;
     cout << "max num: " << util.max(a, 10) << endl;
     cout << "max num: " << util.min(a, 10) << endl;
+    
+    
+    vector<int> v;
+    for (int i=0; i<util.randint(3,10); i++){
+        v.push_back(util.randint(0,100));
+    }
+    for (vector<int>::size_type i = 0; i != v.size(); i++) {
+        cout << v[i] << ' ';
+    }
+    cout << endl;
+    cout << util.max(v) << endl;
+    cout << util.min(v) << endl;
 
 }
 
