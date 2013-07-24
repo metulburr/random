@@ -1,9 +1,11 @@
+
 #include <iostream>
 
 #include <cstdlib> //randint
 #include <ctime> //randint
 #include <vector>
 #include <fstream> 
+#include <sstream>
 using namespace std;
 
 
@@ -111,7 +113,68 @@ class Utility{
             }
             f.close();
         }
+    
+    
+    //type conversion
+        string int2str(int inter){
+            //convert from int to string
+            stringstream num_str;
+            num_str << inter;
+            return num_str.str();
+        }
+        int str2int(string str){
+            //convert from string to int
+            int i;
+            stringstream ss(str);
+            ss >> i;
+            return i;
+        }
 
+        int flo2int(float floater){
+            //convert from float to int
+            //rounds down
+            int i = static_cast<int>(floater);
+            return i;
+        }
+        
+        int dou2int(double d){
+            //convert from double to int
+            //rounds down
+            int i = static_cast<int>(d);
+            return i;
+        }
+
+        string cha2str(char ch){
+            //ocnvert from cahr to string
+            stringstream ss;
+            string s;
+            ss << ch;
+            ss >> s;
+            return s;
+        }
+
+        char str2cha(string stringer){
+            //convert from string to char
+            stringstream ss;
+            char c;
+            ss << stringer;
+            ss >> c;
+            return c;
+        }
+
+        int cha2asc(char ch){
+            //convert from character to ascii number
+            int i;
+            i = (int)ch;
+            return i;
+        }
+
+        char asc2cha(int num){
+            //convert from ascii number to character
+            char c;
+            c = (char)num;
+            return c;
+        }
 };
 
 
@@ -164,7 +227,14 @@ void test(){
     vector<string> s = {"test", "this", "right\nnow"};
     util.write(name, s);
     util.open(name);
-
+    
+    cout << util.int2str(1024).substr(0,3) << endl;
+    cout << util.str2int("24") + 1 << endl;
+    cout << util.flo2int(10.1) - 5 << endl;
+    cout << util.cha2str('c') + "h" << endl;
+    cout << util.str2cha("s") + 'h' << endl;
+    cout << util.cha2asc('c') << endl;
+    cout << util.asc2cha(99) << endl;
 }
 
 
