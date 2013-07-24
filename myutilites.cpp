@@ -3,6 +3,7 @@
 #include <cstdlib> //randint
 #include <ctime> //randint
 #include <vector>
+#include <fstream> 
 using namespace std;
 
 
@@ -14,7 +15,7 @@ class Utility{
             srand_has_exc = false;
         }
         
-        
+    //random
         int randint(int start=0, int maxnum=0, int increment=0){
             /*generate a random int max at maxnum, starting from start, increment add value to both
              * 
@@ -39,6 +40,7 @@ class Utility{
             return num;
         }
         
+    //basic operations
         string reverse(string s){
             return string(s.rbegin(), s.rend());
         }
@@ -79,6 +81,35 @@ class Utility{
                 }
             }
             return mn;
+        }
+        
+        
+        
+    //file i/o
+        void write(string filename, string data){
+            ofstream f;
+            f.open(filename);
+            f << data;
+            f.close();
+        }
+
+        void write(string filename, vector<string> v, string sep="\n"){
+            ofstream f;
+            f.open(filename);
+            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+                f << v[i] << sep;
+            }
+            f.close();
+        }
+
+        void open(string filename){ //get entire line
+            string s = "";
+            ifstream f;
+            f.open(filename);
+            while(getline(f, s)){
+                cout << s <<endl;
+            }
+            f.close();
         }
 
 };
@@ -125,6 +156,14 @@ void test(){
     cout << endl;
     cout << util.max(v) << endl;
     cout << util.min(v) << endl;
+    
+    
+    string name = "test.html";
+    util.write(name, "some\nrandom\ndata");
+    util.open(name);
+    vector<string> s = {"test", "this", "right\nnow"};
+    util.write(name, s);
+    util.open(name);
 
 }
 
