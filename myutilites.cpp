@@ -5,27 +5,56 @@
 #include <vector>
 #include <fstream> 
 #include <sstream>
-using namespace std;
+
 
 
 class Utility{
         bool srand_has_exc;
     public:
-    
+        std::string randint_help = "int randint(int start=0, int max=0, int increment=0) \n\treturn random int from start to max by increment";
+        std::string reverse_help = "string reverse(string s) \n\treturn reverse string s";
+        std::string join_help = "string join(vector<string> v, string sep)\nstring join(string array[], int size, string sep) \n\tjoin vector/array into string separated by sep";
+        std::string max_help = "int max(int a[], int size)\nint max(vector<int> v) \n\treturn max int from vector/array";
+        std::string min_help = "int min(int a[], int size)\nint min(vector<int> v) \n\treturn min int from vector/array";
+        std::string sum_help = "int sum(int a[], int size)\nint sum(vector<int> v) \n\treturn total sum from vector/array";
+        std::string write_help = "void write(string filename, string data)\nvoid write(string filename, vector<string> v, string sep=\"\\n\") \n\twrite data to filename \n\twrite vector to file element on each line adding sep to end of each line";
+        std::string open_help = "vector<string> open(string filename) \n\treturn string vector with each element as a line from filename";
+        std::string int2str_help = "string int2str(int inter) \n\tconvert from int to string";
+        std::string str2int_help = "int str2int(string str) \n\tconvert from string to int";
+        std::string flo2int_help = "int flo2int(float floater) \n\tconvert from float to int";
+        std::string dou2int_help = "int dou2int(double d) \n\tconvert from double to int";
+        std::string cha2str_help = "string cha2str(char ch) \n\tconvert from char to string";
+        std::string str2cha_help = "char str2cha(string stringer) \n\tconvert from string to char";
+        std::string cha2asc_help = "int cha2asc(char ch) \n\tconvert from char to ascii number";
+        std::string asc2cha_help = "char asc2cha(int num) \n\tconvert from ascii number to char";
+        std::string strip_help = "string strip(const string &str, const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right up until other character";
+        std::string reduce_help = "string reduce(const string &str, const string &fill = \" \", const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right and fill";
+        std::string print_help = "template <typename T> void print(T var) \n\tprint var";
+        
+        
+        std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
+            sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
+            cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help
+        };
+        std::string help(){
+            std::string s;
+            s += "\n";
+            for (int i=0; i<attr.size(); i++){
+                s += attr[i] + "\n";
+            }
+            return s;
+        }
+        
+        
+        
         Utility(){
             srand_has_exc = false;
         }
-        
+
     //random
         int randint(int start=0, int maxnum=0, int increment=0){
-            /*generate a random int max at maxnum, starting from start, increment add value to both
-             * 
-             * maxnum = max number minus one
-             * start = number no less than accepted
-             * increment = add increment to 
-             */
             if (!srand_has_exc){
-                srand(time(0)); 
+                std::srand(std::time(0)); 
                 srand_has_exc = true;
             }
             int num=0;
@@ -42,13 +71,13 @@ class Utility{
         }
         
     //basic operations
-        string reverse(string s){
-            return string(s.rbegin(), s.rend());
+        std::string reverse(std::string s){
+            return std::string(s.rbegin(), s.rend());
         }
         
         //join vector into string separated by sep
-        string join(vector<string> v, string sep){
-            stringstream ss;
+        std::string join(std::vector<std::string> v, std::string sep){
+            std::stringstream ss;
             for(size_t i = 0; i < v.size(); ++i){
                 if(i != 0)
                     ss << sep;
@@ -58,8 +87,8 @@ class Utility{
         }
 
         //join str array into string separeted by sep
-        string join(string array[], int size, string sep){
-            stringstream ss;
+        std::string join(std::string array[], int size, std::string sep){
+            std::stringstream ss;
             for(size_t i = 0; i < size; ++i){
                 if(i != 0)
                     ss << sep;
@@ -97,9 +126,9 @@ class Utility{
             return total;
         }
         //get max int from vector
-        int max(vector<int> v){
+        int max(std::vector<int> v){
             int mx = v[0];
-            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+            for (std::vector<int>::size_type i = 0; i != v.size(); i++) {
                 if(mx < v[i]){
                     mx = v[i];
                 }
@@ -107,9 +136,9 @@ class Utility{
             return mx;
         }
         //get min int from vector
-        int min(vector<int> v){
+        int min(std::vector<int> v){
             int mn = v[0];
-            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+            for (std::vector<int>::size_type i = 0; i != v.size(); i++) {
                 if(mn > v[i]){
                     mn = v[i];
                 }
@@ -117,9 +146,9 @@ class Utility{
             return mn;
         }
         //get sum of int vector
-        int sum(vector<int> v){
+        int sum(std::vector<int> v){
             int total = 0;
-            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+            for (std::vector<int>::size_type i = 0; i != v.size(); i++) {
                 total += v[i];
             }
             return total;
@@ -128,26 +157,26 @@ class Utility{
         
     //file i/o
         //write full str to file
-        void write(string filename, string data){
-            ofstream f;
+        void write(std::string filename, std::string data){
+            std::ofstream f;
             f.open(filename);
             f << data;
             f.close();
         }
         //write vector to file spaced by index, separated by sep
-        void write(string filename, vector<string> v, string sep="\n"){
-            ofstream f;
+        void write(std::string filename, std::vector<std::string> v, std::string sep="\n"){
+            std::ofstream f;
             f.open(filename);
-            for (vector<int>::size_type i = 0; i != v.size(); i++) {
+            for (std::vector<int>::size_type i = 0; i != v.size(); i++) {
                 f << v[i] << sep;
             }
             f.close();
         }
         //open file and read into vector str
-        vector<string> open(string filename){ //get entire line
-            string s = "";
-            vector<string> v;
-            ifstream f;
+        std::vector<std::string> open(std::string filename){ //get entire line
+            std::string s = "";
+            std::vector<std::string> v;
+            std::ifstream f;
             f.open(filename);
             while(getline(f, s)){
                 v.push_back(s);
@@ -159,16 +188,16 @@ class Utility{
     
     //type conversion
         //convert from int to string
-        string int2str(int inter){
-            stringstream num_str;
+        std::string int2str(int inter){
+            std::stringstream num_str;
             num_str << inter;
             return num_str.str();
         }
         
         //convert from string to int
-        int str2int(string str){
+        int str2int(std::string str){
             int i;
-            stringstream ss(str);
+            std::stringstream ss(str);
             ss >> i;
             return i;
         }
@@ -186,17 +215,17 @@ class Utility{
         }
         
         //ocnvert from cahr to string
-        string cha2str(char ch){
-            stringstream ss;
-            string s;
+        std::string cha2str(char ch){
+            std::stringstream ss;
+            std::string s;
             ss << ch;
             ss >> s;
             return s;
         }
 
         //convert from string to char
-        char str2cha(string stringer){
-            stringstream ss;
+        char str2cha(std::string stringer){
+            std::stringstream ss;
             char c;
             ss << stringer;
             ss >> c;
@@ -217,7 +246,7 @@ class Utility{
             return c;
         }
         
-        string strip(const std::string& str,
+        std::string strip(const std::string& str,
                          const std::string& whitespace = " \t")
         {
             const auto strBegin = str.find_first_not_of(whitespace);
@@ -230,7 +259,7 @@ class Utility{
             return str.substr(strBegin, strRange);
         }
 
-        string reduce(const std::string& str,
+        std::string reduce(const std::string& str,
                            const std::string& fill = " ",
                            const std::string& whitespace = " \t")
         {
@@ -252,14 +281,17 @@ class Utility{
 
             return result;
         }
+        template <typename T> 
+        void print(T var){
+            std::cout << var << std::endl;
+        }
 };
 
 
 void test(){
+    using namespace std;
 
     Utility util;
-    
-    
     for (int i=0; i<10; i++){
         cout << util.randint(5, 25) << ' ';
     }
@@ -320,7 +352,7 @@ void test(){
     cout << util.cha2asc('c') << endl;
     cout << util.asc2cha(99) << endl;
 
-    string foo = "    too much\t   \tspace\t\t\t  ";
+    string foo = " too much\t \tspace\t\t\t ";
     string bar = "one\ntwo";
     cout << "[" << util.strip(foo) << "]" << endl;
     cout << "[" << util.reduce(foo) << "]" << endl;
@@ -332,7 +364,10 @@ void test(){
     vector<string> jointest2 = {"join", "random", "string", "vector"};
     cout << util.join(jointest2, ",");
     
-    
+    std::cout << util.help() << std::endl;
+    std::cout << util.strip_help << endl;
+    util.print(util.strip_help + "TEST");
+    util.print(1 + 1);
 }
 
 
