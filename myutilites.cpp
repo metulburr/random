@@ -3,9 +3,9 @@
 #include <cstdlib> //randint
 #include <ctime> //randint
 #include <vector>
-#include <fstream> 
+#include <fstream>
 #include <sstream>
-
+#include <dirent.h>
 
 
 class Utility{
@@ -16,7 +16,7 @@ class Utility{
         //    "\t    cout << util.randint(5, 25) << ' ';\n"
         //    "\t}\n";
         std::string randint_help = "int randint(int start=0, int max=0, int increment=0) \n\treturn random int from start to max by increment";// + randint_insert;
-        
+
         std::string reverse_help = "string reverse(string s) \n\treturn reverse string s";
         std::string join_help = "string join(vector<string> v, string sep)\nstring join(string array[], int size, string sep) \n\tjoin vector/array into string separated by sep";
         std::string max_help = "int max(int a[], int size)\nint max(vector<int> v) \n\treturn max int from vector/array";
@@ -35,12 +35,12 @@ class Utility{
         std::string strip_help = "string strip(const string &str, const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right up until other character";
         std::string reduce_help = "string reduce(const string &str, const string &fill = \" \", const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right and fill";
         std::string print_help = "template <typename T> void print(T var) \n\tprint var";
-        
-        
+    std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
+
+
         std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
             sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
-            cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help
-        };
+            cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help};
         std::string help(){
             std::string s;
             s += "\n";
@@ -49,9 +49,9 @@ class Utility{
             }
             return s;
         }
-        
-        
-        
+
+
+
         Utility(){
             srand_has_exc = false;
         }
@@ -59,12 +59,12 @@ class Utility{
     //random
         int randint(int start=0, int maxnum=0, int increment=0){
             if (!srand_has_exc){
-                std::srand(std::time(0)); 
+                std::srand(std::time(0));
                 srand_has_exc = true;
             }
             int num=0;
             while (true){
-                num = (rand() % maxnum) + increment; 
+                num = (rand() % maxnum) + increment;
                 if (start == 0)
                     return num;
                 else if (num < start)
@@ -74,12 +74,12 @@ class Utility{
             }
             return num;
         }
-        
+
     //basic operations
         std::string reverse(std::string s){
             return std::string(s.rbegin(), s.rend());
         }
-        
+
         //join vector into string separated by sep
         std::string join(std::vector<std::string> v, std::string sep){
             std::stringstream ss;
@@ -101,7 +101,7 @@ class Utility{
             }
             return ss.str();
         }
-        
+
         //get max int from array
         int max(int a[], int size){
             int mx = a[0];
@@ -158,8 +158,8 @@ class Utility{
             }
             return total;
         }
-        
-        
+
+
     //file i/o
         //write full str to file
         void write(std::string filename, std::string data){
@@ -189,8 +189,8 @@ class Utility{
             f.close();
             return v;
         }
-    
-    
+
+
     //type conversion
         //convert from int to string
         std::string int2str(int inter){
@@ -198,7 +198,7 @@ class Utility{
             num_str << inter;
             return num_str.str();
         }
-        
+
         //convert from string to int
         int str2int(std::string str){
             int i;
@@ -206,19 +206,19 @@ class Utility{
             ss >> i;
             return i;
         }
-        
+
         //convert from float to int
         int flo2int(float floater){
             int i = static_cast<int>(floater);
             return i;
         }
-        
+
         //convert from double to int
         int dou2int(double d){
             int i = static_cast<int>(d);
             return i;
         }
-        
+
         //ocnvert from cahr to string
         std::string cha2str(char ch){
             std::stringstream ss;
@@ -250,7 +250,7 @@ class Utility{
             c = (char)num;
             return c;
         }
-        
+
         std::string strip(const std::string& str,
                          const std::string& whitespace = " \t")
         {
@@ -286,10 +286,26 @@ class Utility{
 
             return result;
         }
-        template <typename T> 
+        template <typename T>
         void print(T var){
             std::cout << var << std::endl;
         }
+
+    int getdir (std::string dir, std::vector<std::string> &files)
+    {
+        DIR *dp;
+        struct dirent *dirp;
+        if((dp  = opendir(dir.c_str())) == NULL) {
+        std::cout << "Error(" << errno << ") opening " << dir << std::endl;
+        return errno;
+        }
+
+        while ((dirp = readdir(dp)) != NULL) {
+        files.push_back(std::string(dirp->d_name));
+        }
+        closedir(dp);
+        return 0;
+    }
 };
 
 
@@ -373,6 +389,13 @@ void test(){
     std::cout << util.strip_help << endl;
     util.print(util.strip_help + "TEST");
     util.print(1 + 1.1);
+    
+    std::string dir = std::string(".");
+    std::vector<std::string> files = std::vector<std::string>();
+    util.getdir(dir,files);
+    for (int i = 0;i < files.size();i++) {
+        std::cout << files[i] << std::endl;
+    }
 }
 
 
