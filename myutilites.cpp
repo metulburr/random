@@ -46,6 +46,29 @@ class Utility{
             return string(s.rbegin(), s.rend());
         }
         
+        //join vector into string separated by sep
+        string join(vector<string> v, string sep){
+            stringstream ss;
+            for(size_t i = 0; i < v.size(); ++i){
+                if(i != 0)
+                    ss << sep;
+                ss << v[i];
+            }
+            return ss.str();
+        }
+
+        //join str array into string separeted by sep
+        string join(string array[], int size, string sep){
+            stringstream ss;
+            for(size_t i = 0; i < size; ++i){
+                if(i != 0)
+                    ss << sep;
+                ss << array[i];
+            }
+            return ss.str();
+        }
+        
+        //get max int from array
         int max(int a[], int size){
             int mx = a[0];
             for(int i=0; i<size; i++){
@@ -55,6 +78,7 @@ class Utility{
             }
             return mx;
         }
+        //get min int from array
         int min(int a[], int size){
             int mn = a[0];
             for(int i=0; i<size; i++){
@@ -64,6 +88,7 @@ class Utility{
             }
             return mn;
         }
+        //get sum of int array
         int sum(int a[], int size){
             int total = 0;
             for(int i=0; i<size; i++){
@@ -71,7 +96,7 @@ class Utility{
             }
             return total;
         }
-        
+        //get max int from vector
         int max(vector<int> v){
             int mx = v[0];
             for (vector<int>::size_type i = 0; i != v.size(); i++) {
@@ -81,6 +106,7 @@ class Utility{
             }
             return mx;
         }
+        //get min int from vector
         int min(vector<int> v){
             int mn = v[0];
             for (vector<int>::size_type i = 0; i != v.size(); i++) {
@@ -90,6 +116,7 @@ class Utility{
             }
             return mn;
         }
+        //get sum of int vector
         int sum(vector<int> v){
             int total = 0;
             for (vector<int>::size_type i = 0; i != v.size(); i++) {
@@ -100,13 +127,14 @@ class Utility{
         
         
     //file i/o
+        //write full str to file
         void write(string filename, string data){
             ofstream f;
             f.open(filename);
             f << data;
             f.close();
         }
-
+        //write vector to file spaced by index, separated by sep
         void write(string filename, vector<string> v, string sep="\n"){
             ofstream f;
             f.open(filename);
@@ -115,49 +143,50 @@ class Utility{
             }
             f.close();
         }
-
-        void open(string filename){ //get entire line
+        //open file and read into vector str
+        vector<string> open(string filename){ //get entire line
             string s = "";
+            vector<string> v;
             ifstream f;
             f.open(filename);
             while(getline(f, s)){
-                cout << s <<endl;
+                v.push_back(s);
             }
             f.close();
+            return v;
         }
     
     
     //type conversion
+        //convert from int to string
         string int2str(int inter){
-            //convert from int to string
             stringstream num_str;
             num_str << inter;
             return num_str.str();
         }
+        
+        //convert from string to int
         int str2int(string str){
-            //convert from string to int
             int i;
             stringstream ss(str);
             ss >> i;
             return i;
         }
-
+        
+        //convert from float to int
         int flo2int(float floater){
-            //convert from float to int
-            //rounds down
             int i = static_cast<int>(floater);
             return i;
         }
         
+        //convert from double to int
         int dou2int(double d){
-            //convert from double to int
-            //rounds down
             int i = static_cast<int>(d);
             return i;
         }
-
+        
+        //ocnvert from cahr to string
         string cha2str(char ch){
-            //ocnvert from cahr to string
             stringstream ss;
             string s;
             ss << ch;
@@ -165,8 +194,8 @@ class Utility{
             return s;
         }
 
+        //convert from string to char
         char str2cha(string stringer){
-            //convert from string to char
             stringstream ss;
             char c;
             ss << stringer;
@@ -174,54 +203,55 @@ class Utility{
             return c;
         }
 
+        //convert from character to ascii number
         int cha2asc(char ch){
-            //convert from character to ascii number
             int i;
             i = (int)ch;
             return i;
         }
 
+        //convert from ascii number to character
         char asc2cha(int num){
-            //convert from ascii number to character
             char c;
             c = (char)num;
             return c;
         }
-		string strip(const std::string& str,
-						 const std::string& whitespace = " \t")
-		{
-			const auto strBegin = str.find_first_not_of(whitespace);
-			if (strBegin == std::string::npos)
-				return ""; // no content
+        
+        string strip(const std::string& str,
+                         const std::string& whitespace = " \t")
+        {
+            const auto strBegin = str.find_first_not_of(whitespace);
+            if (strBegin == std::string::npos)
+                return ""; // no content
 
-			const auto strEnd = str.find_last_not_of(whitespace);
-			const auto strRange = strEnd - strBegin + 1;
+            const auto strEnd = str.find_last_not_of(whitespace);
+            const auto strRange = strEnd - strBegin + 1;
 
-			return str.substr(strBegin, strRange);
-		}
+            return str.substr(strBegin, strRange);
+        }
 
-		string reduce(const std::string& str,
-						   const std::string& fill = " ",
-						   const std::string& whitespace = " \t")
-		{
-			// trim first
-			auto result = strip(str, whitespace);
+        string reduce(const std::string& str,
+                           const std::string& fill = " ",
+                           const std::string& whitespace = " \t")
+        {
+            // trim first
+            auto result = strip(str, whitespace);
 
-			// replace sub ranges
-			auto beginSpace = result.find_first_of(whitespace);
-			while (beginSpace != std::string::npos)
-			{
-				const auto endSpace = result.find_first_not_of(whitespace, beginSpace);
-				const auto range = endSpace - beginSpace;
+            // replace sub ranges
+            auto beginSpace = result.find_first_of(whitespace);
+            while (beginSpace != std::string::npos)
+            {
+                const auto endSpace = result.find_first_not_of(whitespace, beginSpace);
+                const auto range = endSpace - beginSpace;
 
-				result.replace(beginSpace, range, fill);
+                result.replace(beginSpace, range, fill);
 
-				const auto newStart = beginSpace + fill.length();
-				beginSpace = result.find_first_of(whitespace, newStart);
-			}
+                const auto newStart = beginSpace + fill.length();
+                beginSpace = result.find_first_of(whitespace, newStart);
+            }
 
-			return result;
-		}
+            return result;
+        }
 };
 
 
@@ -285,10 +315,15 @@ void test(){
 
     string foo = "    too much\t   \tspace\t\t\t  ";
     string bar = "one\ntwo";
-    cout << "[" << strip(foo) << "]" << endl;
-    cout << "[" << reduce(foo) << "]" << endl;
-    cout << "[" << reduce(foo, "-") << "]" << endl;
-	cout << "[" << strip(bar) << "]" << endl;
+    cout << "[" << util.strip(foo) << "]" << endl;
+    cout << "[" << util.reduce(foo) << "]" << endl;
+    cout << "[" << util.reduce(foo, "-") << "]" << endl;
+    cout << "[" << util.strip(bar) << "]" << endl;
+    
+    string jointest[] = {"join", "random", "string", "array"};
+    cout << util.join(jointest, 4, ",") << endl;
+    vector<string> jointest2 = {"join", "random", "string", "vector"};
+    cout << util.join(jointest2, ",");
 }
 
 
