@@ -300,10 +300,17 @@ void test(){
     
     string name = "test.html";
     util.write(name, "some\nrandom\ndata");
-    util.open(name);
+    vector<string> data = util.open(name);
+    for (vector<int>::size_type i = 0; i != data.size(); i++) {
+        cout << data[i] << endl;
+    }
     vector<string> s = {"test", "this", "right\nnow"};
     util.write(name, s);
-    util.open(name);
+    vector<string> data2 = util.open(name);
+    for (vector<int>::size_type i = 0; i != data2.size(); i++) {
+        cout << data2[i] << ' ';
+    }
+    cout << endl;
     
     cout << util.int2str(1024).substr(0,3) << endl;
     cout << util.str2int("24") + 1 << endl;
@@ -324,6 +331,8 @@ void test(){
     cout << util.join(jointest, 4, ",") << endl;
     vector<string> jointest2 = {"join", "random", "string", "vector"};
     cout << util.join(jointest2, ",");
+    
+    
 }
 
 
