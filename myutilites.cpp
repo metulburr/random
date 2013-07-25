@@ -11,7 +11,12 @@
 class Utility{
         bool srand_has_exc;
     public:
-        std::string randint_help = "int randint(int start=0, int max=0, int increment=0) \n\treturn random int from start to max by increment";
+        //std::string randint_insert =
+        //    "\n\tExample:\n\tfor (int i=0; i<10; i++){\n"
+        //    "\t    cout << util.randint(5, 25) << ' ';\n"
+        //    "\t}\n";
+        std::string randint_help = "int randint(int start=0, int max=0, int increment=0) \n\treturn random int from start to max by increment";// + randint_insert;
+        
         std::string reverse_help = "string reverse(string s) \n\treturn reverse string s";
         std::string join_help = "string join(vector<string> v, string sep)\nstring join(string array[], int size, string sep) \n\tjoin vector/array into string separated by sep";
         std::string max_help = "int max(int a[], int size)\nint max(vector<int> v) \n\treturn max int from vector/array";
@@ -367,7 +372,7 @@ void test(){
     std::cout << util.help() << std::endl;
     std::cout << util.strip_help << endl;
     util.print(util.strip_help + "TEST");
-    util.print(1 + 1);
+    util.print(1 + 1.1);
 }
 
 
