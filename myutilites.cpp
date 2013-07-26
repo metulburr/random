@@ -35,12 +35,13 @@ class Utility{
         std::string strip_help = "string strip(const string &str, const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right up until other character";
         std::string reduce_help = "string reduce(const string &str, const string &fill = \" \", const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right and fill";
         std::string print_help = "template <typename T> void print(T var) \n\tprint var";
-    std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
-
+		std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
+		std::string split_help = "void split(const std::string &str, std::vector<std::string> &v) \n\tsplit string into vector elements using whitespace as delimiter, strip off whitespace";
 
         std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
             sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
-            cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help};
+            cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help,
+            split_help};
         std::string help(){
             std::string s;
             s += "\n";
@@ -286,26 +287,44 @@ class Utility{
 
             return result;
         }
+        
         template <typename T>
         void print(T var){
             std::cout << var << std::endl;
         }
 
-    int getdir (std::string dir, std::vector<std::string> &files)
-    {
-        DIR *dp;
-        struct dirent *dirp;
-        if((dp  = opendir(dir.c_str())) == NULL) {
-        std::cout << "Error(" << errno << ") opening " << dir << std::endl;
-        return errno;
-        }
+		int getdir (std::string dir, std::vector<std::string> &files)
+		{
+			DIR *dp;
+			struct dirent *dirp;
+			if((dp  = opendir(dir.c_str())) == NULL) {
+			std::cout << "Error(" << errno << ") opening " << dir << std::endl;
+			return errno;
+			}
 
-        while ((dirp = readdir(dp)) != NULL) {
-        files.push_back(std::string(dirp->d_name));
-        }
-        closedir(dp);
-        return 0;
-    }
+			while ((dirp = readdir(dp)) != NULL) {
+			files.push_back(std::string(dirp->d_name));
+			}
+			closedir(dp);
+			return 0;
+		}
+    
+		void split(const std::string &str, std::vector<std::string> &v) {
+			std::stringstream ss(str);
+			ss >> std::noskipws;
+			std::string field;
+			char ws_delim;
+			while(true) {
+				if( ss >> field )
+					v.push_back(field);
+				else if (ss.eof())
+					break;
+				//else
+				//  v.push_back(std::string()); //add whitespace into vector
+				ss.clear();
+				ss >> ws_delim;
+				}
+		}
 };
 
 
@@ -395,6 +414,12 @@ void test(){
     util.getdir(dir,files);
     for (int i = 0;i < files.size();i++) {
         std::cout << files[i] << std::endl;
+    }
+    
+    std::vector<std::string> v2;
+    util.split("hello world  how are   \n\tyou\n\t \tp 1.1 1test", v2);
+    for (int i=0; i<v2.size(); i++){
+        std::cout << v2[i] << "|";
     }
 }
 
