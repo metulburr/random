@@ -35,13 +35,14 @@ class Utility{
         std::string strip_help = "string strip(const string &str, const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right up until other character";
         std::string reduce_help = "string reduce(const string &str, const string &fill = \" \", const string &whitespace = \" \\t\") \n\tstrip whitespace from left and right and fill";
         std::string print_help = "template <typename T> void print(T var) \n\tprint var";
-		std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
-		std::string split_help = "void split(const std::string &str, std::vector<std::string> &v) \n\tsplit string into vector elements using whitespace as delimiter, strip off whitespace";
+        std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
+        std::string split_help = "void split(const std::string &str, std::vector<std::string> &v) \n\tsplit string into vector elements using whitespace as delimiter, strip off whitespace";
+        std::string avg_help = "double avg(const std::vector<double> &v)\ndouble avg(const double *a, int size) \n\treturn average for container";
 
         std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
             sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
             cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help,
-            split_help};
+            split_help, avg_help};
         std::string help(){
             std::string s;
             s += "\n";
@@ -293,38 +294,53 @@ class Utility{
             std::cout << var << std::endl;
         }
 
-		int getdir (std::string dir, std::vector<std::string> &files)
-		{
-			DIR *dp;
-			struct dirent *dirp;
-			if((dp  = opendir(dir.c_str())) == NULL) {
-			std::cout << "Error(" << errno << ") opening " << dir << std::endl;
-			return errno;
-			}
+        int getdir (std::string dir, std::vector<std::string> &files)
+        {
+            DIR *dp;
+            struct dirent *dirp;
+            if((dp  = opendir(dir.c_str())) == NULL) {
+            std::cout << "Error(" << errno << ") opening " << dir << std::endl;
+            return errno;
+            }
 
-			while ((dirp = readdir(dp)) != NULL) {
-			files.push_back(std::string(dirp->d_name));
-			}
-			closedir(dp);
-			return 0;
-		}
+            while ((dirp = readdir(dp)) != NULL) {
+            files.push_back(std::string(dirp->d_name));
+            }
+            closedir(dp);
+            return 0;
+        }
     
-		void split(const std::string &str, std::vector<std::string> &v) {
-			std::stringstream ss(str);
-			ss >> std::noskipws;
-			std::string field;
-			char ws_delim;
-			while(true) {
-				if( ss >> field )
-					v.push_back(field);
-				else if (ss.eof())
-					break;
-				//else
-				//  v.push_back(std::string()); //add whitespace into vector
-				ss.clear();
-				ss >> ws_delim;
-				}
-		}
+        void split(const std::string &str, std::vector<std::string> &v) {
+            std::stringstream ss(str);
+            ss >> std::noskipws;
+            std::string field;
+            char ws_delim;
+            while(true) {
+                if( ss >> field )
+                    v.push_back(field);
+                else if (ss.eof())
+                    break;
+                //else
+                //  v.push_back(std::string()); //add whitespace into vector
+                ss.clear();
+                ss >> ws_delim;
+                }
+        }
+        
+        double avg(const std::vector<double> &v){
+            double total = 0.0;
+            for (int i=0; i<v.size(); i++){
+                total += v[i];
+            }
+            return total / v.size();
+        }
+        double avg(const double *a, int size){
+            double total = 0.0;
+            for (int i=0; i<size; i++){
+                total += a[i];
+            }
+            return total / size;
+        }
 };
 
 
@@ -421,6 +437,15 @@ void test(){
     for (int i=0; i<v2.size(); i++){
         std::cout << v2[i] << "|";
     }
+    
+    std::vector<double> avg_v;
+    avg_v.push_back(100);
+    avg_v.push_back(95);
+    avg_v.push_back(78.943);
+    std::cout << std::endl << util.avg(avg_v) << std::endl;
+    
+    double avg_a[] = {100,95,78.943};
+    std::cout << util.avg(avg_a, 3) << std::endl;
 }
 
 
