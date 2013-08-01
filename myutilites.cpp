@@ -38,11 +38,12 @@ class Utility{
         std::string getdir_help = "int getdir (std::string dir, std::vector<std::string> &files) \n\t return vector<string> of files";
         std::string split_help = "void split(const std::string &str, std::vector<std::string> &v) \n\tsplit string into vector elements using whitespace as delimiter, strip off whitespace";
         std::string avg_help = "double avg(const std::vector<double> &v)\ndouble avg(const double *a, int size) \n\treturn average for container";
+        std::string splice_help = "std::string splice(std::string s, int front=0, int back=0) \n\tsplice string from front to end";
 
         std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
             sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
             cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help,
-            split_help, avg_help};
+            split_help, avg_help, splice_help};
         std::string help(){
             std::string s;
             s += "\n";
@@ -324,7 +325,7 @@ class Utility{
                 //  v.push_back(std::string()); //add whitespace into vector
                 ss.clear();
                 ss >> ws_delim;
-                }
+            }
         }
         
         double avg(const std::vector<double> &v){
@@ -340,6 +341,12 @@ class Utility{
                 total += a[i];
             }
             return total / size;
+        }
+
+        std::string splice(std::string s, int front=0, int back=0){
+            std::string s2 = s.substr(front);
+            std::string s3 = std::string(s2.rbegin(), s2.rend()).substr(back);
+            return std::string(s3.rbegin(), s3.rend());
         }
 };
 
@@ -437,6 +444,7 @@ void test(){
     for (int i=0; i<v2.size(); i++){
         std::cout << v2[i] << "|";
     }
+   // std::cout <<  <<std::endl << v2.size() << std::endl;
     
     std::vector<double> avg_v;
     avg_v.push_back(100);
@@ -446,6 +454,9 @@ void test(){
     
     double avg_a[] = {100,95,78.943};
     std::cout << util.avg(avg_a, 3) << std::endl;
+    
+    std::string splice_test = "some random string for splice test";
+    std::cout << util.splice(splice_test, 2, 2); //2 from front, 2 fronm back
 }
 
 
