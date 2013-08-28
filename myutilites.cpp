@@ -39,7 +39,9 @@ class Utility{
         std::string split_help = "void split(const std::string &str, std::vector<std::string> &v) \n\tsplit string into vector elements using whitespace as delimiter, strip off whitespace";
         std::string avg_help = "double avg(const std::vector<double> &v)\ndouble avg(const double *a, int size) \n\treturn average for container";
         std::string splice_help = "std::string splice(std::string s, int front=0, int back=0) \n\tsplice string from front to end";
-
+		std::string split2_help;
+		std::string split3_help;
+		
         std::vector<std::string> attr = {randint_help, reverse_help, join_help, max_help, min_help,
             sum_help, write_help, open_help, int2str_help, str2int_help, flo2int_help, dou2int_help,
             cha2str_help, str2cha_help, cha2asc_help, asc2cha_help, strip_help, reduce_help, print_help,
@@ -254,18 +256,16 @@ class Utility{
             return c;
         }
 
-        std::string strip(const std::string& str,
-                         const std::string& whitespace = " \t")
-        {
-            const auto strBegin = str.find_first_not_of(whitespace);
-            if (strBegin == std::string::npos)
-                return ""; // no content
-
-            const auto strEnd = str.find_last_not_of(whitespace);
-            const auto strRange = strEnd - strBegin + 1;
-
-            return str.substr(strBegin, strRange);
-        }
+		std::string strip(const std::string &str, const std::string &whitespace = " \t\n"){
+			const auto start = str.find_first_not_of(whitespace);
+			const auto end = str.find_last_not_of(whitespace);
+			const auto range = end - start + 1;
+			
+			if (start == std::string::npos)
+				return ""; // no content
+			else
+				return str.substr(start, range);
+		}
 
         std::string reduce(const std::string& str,
                            const std::string& fill = " ",
@@ -311,7 +311,7 @@ class Utility{
             return 0;
         }
     
-        void split(const std::string &str, std::vector<std::string> &v) {
+        void split(const std::string &str, std::vector<std::string> &v, bool whitespace=false) {
             std::stringstream ss(str);
             ss >> std::noskipws;
             std::string field;
@@ -321,12 +321,44 @@ class Utility{
                     v.push_back(field);
                 else if (ss.eof())
                     break;
-                //else
-                //  v.push_back(std::string()); //add whitespace into vector
+                else
+                    if (whitespace){
+                        v.push_back(std::string()); 
+                    }
                 ss.clear();
                 ss >> ws_delim;
             }
         }
+        
+        //creates its own vector it returns
+		std::vector<std::string> split2(const std::string &str) {
+			std::stringstream ss(str);
+			std::vector<std::string> v;
+			ss >> std::noskipws;
+			std::string field;
+			char ws_delim;
+			while(true) {
+				if( ss >> field )
+					v.push_back(field);
+				else if (ss.eof())
+					break;
+				ss.clear();
+				ss >> ws_delim;
+			}
+			return v;
+		}
+		
+		//split to vector by a char delimiter 
+		std::vector<std::string> split3(std::string s, char delim=' '){
+			std::vector<std::string> v;
+			std::stringstream ss(s);
+			std::string temp;
+			
+			while( getline(ss, temp, delim)){
+				v.push_back(temp);
+			}
+			return v;
+		}
         
         double avg(const std::vector<double> &v){
             double total = 0.0;
@@ -457,6 +489,14 @@ void test(){
     
     std::string splice_test = "some random string for splice test";
     std::cout << util.splice(splice_test, 2, 2); //2 from front, 2 fronm back
+    
+    
+    std::string s8 = "0x0002\n,A5651QPR87GBZ094RTF52,D,A,,000001,ABC ,10000.00 ,   EOT,+123+456";
+    std::vector<std::string> v8 = util.split3(s8, ',');
+    for (auto i:v8){
+        std::cout << i << std::endl;
+    }
+    
 }
 
 
