@@ -387,6 +387,37 @@ class Utility{
             std::string s3 = std::string(s2.rbegin(), s2.rend()).substr(back);
             return std::string(s3.rbegin(), s3.rend());
         }
+        
+        //obtain filename from path, split by path_delim
+        std::string path_split(std::string path, char path_delim='/'){
+            std::vector<std::string> v;
+            std::stringstream ss(path);
+            std::string s;
+            
+            while(getline(ss, s, path_delim)){
+                v.push_back(s);
+            }
+            return v.back();
+        }
+
+
+        //obtain filename extension from path, path split by path_delim, filename split by ext_delim
+        std::string path_ext(std::string path, char path_delim='/', char ext_delim='.'){
+            std::vector<std::string> v, ext;
+            std::stringstream ss(path);
+            std::string s, section;
+            
+            while(getline(ss, s, path_delim)){
+                v.push_back(s);
+            }
+            
+            std::stringstream ss2(v.back());
+            while(getline(ss2, section, ext_delim)){
+                ext.push_back(section);
+            }
+            
+            return ext.back();
+        }
 };
 
 
@@ -503,6 +534,10 @@ void test(){
     for (auto i:v8){
         std::cout << i << std::endl;
     }
+    
+    
+    std::cout << util.path_split("/home/metulburr/.vimrc") <<std::endl;
+    std::cout << util.path_ext("/home/metulburr/tester._test.py") << std::endl;;
     
 }
 
