@@ -382,6 +382,10 @@ class Utility{
             return total / size;
         }
 
+
+
+
+    //formatting
         std::string splice(std::string s, int front=0, int back=0){
             std::string s2 = s.substr(front);
             std::string s3 = std::string(s2.rbegin(), s2.rend()).substr(back);
@@ -417,6 +421,13 @@ class Utility{
             }
             
             return ext.back();
+        }
+        
+        //format decimal precision
+        std::string format(long double d, int place){
+            std::stringstream ss;
+            ss << std::fixed << std::setprecision(place) << d;
+            return ss.str();
         }
 };
 
