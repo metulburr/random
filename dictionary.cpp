@@ -31,6 +31,11 @@ class Dict{
             }
             return v;
         }
+        VALUE pop(KEY k){
+            VALUE val = dictionary[k];
+            dictionary.erase(k);
+            return val;
+        }
 };
 
 int main(){
@@ -43,4 +48,6 @@ int main(){
         
     for (auto i:d.values())
         std::cout << i << std::endl;
+
+    std::cout << "removing " << d.pop("key2") << '\n';
 }
