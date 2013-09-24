@@ -1,0 +1,64 @@
+.           matches any character, except for line breaks if dotall is false
+\w          matches any word character (alphanumeric and underscore) 
+\W          matches any character that is not a word character (alphanumeric and underscore)
+\d          matches any digit character (0-9)
+\D          matches any character that is not a digit chracter (0-9)
+\s          matches any whitespace character (spaces, tabs, line breaks)
+\S          matches any character that is not a whitespace character (spaces, tagbs, line breaks)
+[ABC]       matches any single character in the set
+[^ABC]      matches any single character that is not in the set
+[a-z]       matches any single character in the range of a-z
+[a-zA-Z]    matches any single character in the range of a-z or A-Z
+[^f-m]      matches any single character that is not in the range of f-m
+[0-9]       matches any chracter in the range of 0-9
+[\w'-]      matches any word character, single quote, or hyphen
+\xFF        specify a character by its hexidecimal index (\xA9 matches the copyright symbol)
+\\          matches a \ character
+\.          matches a . character
+\+          matches a + character
+\*          matches a * cahracter
+\?          matches a ? character
+\^          matches a ^ character
+\$          matches a $ character
+\[          matches a [ character
+\]          matches a ] character
+\(          matches a ( character
+\)          matches a ) cahracter
+\|          matches a | character
+\{          matches a { character
+\}          matches a } character
+\/          matches a / character
+\'          matches a ' character
+\#          matches a # chracter
+\b          matches a word boundary position such as whitespace or the beginning or end of the string
+\B          matches any position that is not a word boundary
+^           matches the beginning of the string
+$           matches trhe end of the string
+(?=ABC)     positive look ahead. matches a group after your main expression without including it in the result
+(?!ABC)     negative look ahead. specifies a group that can not match after your main expression (ie. if it matches the result is discarded)
+(?<=ABC)    positive look behind. matches a group before your main expression without including it in the result
+(?<!ABC)    negative look behind. specifies a group that can not match before your main expression (ie. if it matches the result is discarded)
+?           make the preceeding token optional. It will match 0 or 1 of the preceeding token (colou?r matches both color and colour)
+*           matches 0 or more of the preceeding token. This is a greedy match, and will match as many characters as possible before satisfying the next token
+*?          matches 0 or more of the preceeding token. This is a lazy match, and will match as few characters as possible before satisfying the next token.
++           matches 1 or more of the preceeding token. This is a greedy match, and will match as many characters  as possible before satisfying the next token
++?          matches 0 or more of the preceeding token. This is a lazy match, and will match as few characters as possible before satisfying the next token
+{5}         match exactly 5 of the preceeding token
+{2, 5}      matches 2 to 5 of the preceeding token. This is a greedy match, and will match as many characters as possible before satisfying the next token
+{2, 5}?     matches 2 to 5 of the preceeding token. This is a lazy match, and will match as few characters as possible before satisying the next token
+(ABC)       group multiple tokens together. This allows you to apply quantifiers to the full group. This creates a capturing group
+(?:ABC)     groups multiple tokens together without creating a capturing froup. This allows you to apply qauntifiers to the full group
+|           alternation. Equivalent of "or". matches the full expression before or after the | (pear|kiwi|plum matches any pearl, kiwi, or plum)(cent(er|re) matches center or centre)
+$$          an escaped $ symbol
+$&          inserts the matched substring
+$`          inserts the portion of the string the preceeds the match
+$'          inserts the portion of the string that follows the match
+$1          inserts the result of the first capture group
+
+
+[0-9]+(?:\.[0-9]*)?     matches integer and decimal numbers
+#?[0-9A-Fa-f]{6}        matches 24bit hex color values with ot without the leading #
+\b0x(?:[0-9A-Fa-f]{6}|0-9A-Fa-f]{8})\b      matches 24bit or 32bit hex color values
+<[^<]+?>                matches html tags
+<?<=^|>)[^><]+?(?=<|$)  matches text that is not part of a html tag
+([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})    matches email addresses
