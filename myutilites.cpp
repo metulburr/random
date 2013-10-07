@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sstream>
 #include <dirent.h>
+#include <initializer_list> //varargs
+#include <iomanip> //setprecision
 
 
 class Utility{
@@ -429,6 +431,28 @@ class Utility{
             ss << std::fixed << std::setprecision(place) << d;
             return ss.str();
         }
+        
+
+        //c method
+        void varargs(){};
+
+        template<typename T, typename... Args>
+        void varargs(T t, Args... args) 
+        {
+            std::cout << t <<std::endl ;
+            varargs(args...) ;
+        }
+
+        //c++ init list method
+        template <class T>
+        void varargs2( std::initializer_list<T> list )
+        {
+            for( auto elem : list )
+            {
+                std::cout << elem << std::endl ;
+            }
+        }
+
 };
 
 
@@ -549,6 +573,10 @@ void test(){
     
     std::cout << util.path_split("/home/metulburr/.vimrc") <<std::endl;
     std::cout << util.path_ext("/home/metulburr/tester._test.py") << std::endl;;
+
+    util.varargs(1, 2.5, 'a', "test");
+    std::cout << '\n' << std::endl;
+    util.varargs2({1 ,2, 5});
     
 }
 
