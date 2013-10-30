@@ -99,6 +99,19 @@ class String{
                 return s.substr(start, range);
         }
         
+        //if constructor arg is only a number, return true if between start and end, else false
+        template <class T, class U>
+        bool between(T start, U end){
+            double number;
+            std::stringstream ss(this->str);
+            ss >> number;
+            
+            if (number > start && number < end)
+                return true;
+            else
+                return false;
+        }
+        
         
         
 };
@@ -124,5 +137,8 @@ int main(){
         }
         std::cout << i << " (" << line.tokens.size() << ")" << std::endl;
     }
+    
+    String num("9.2");
+    std::cout << num.between(9.1, 20) << std::endl;
 
 }

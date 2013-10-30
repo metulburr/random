@@ -37,21 +37,27 @@ class File{
 
 };
 
+std::string replace(std::string s, const std::string& find, const std::string& replacement) {
+    size_t pos = 0;
+    while ((pos = s.find(find, pos)) != std::string::npos) {
+        s.replace(pos, find.length(), replacement);
+        pos += replacement.length();
+    }
+    return s;
+}
+
 std::ostream& operator<<(std::ostream& stdout, const File& obj){
-    std::string start = "[", end = "]", delim = "\", \"";
+    std::string start = "[", end = "]", delim = "\', \'";
     std::string s;
     if (obj.tokens.size() > 0){
-        s += start;
-         s += "\"";
+        s += start + "\'";
         for(auto it = obj.tokens.begin(); it != obj.tokens.end(); ++it){
             s += *it;
             if (&*it != &obj.tokens.back()){ //if addresss of iterator is not address of last element
                 s += delim;
             }
-            else
-                s += "\"";
         }
-        s += end;
+        s += "\'" + end;
     }
     else{
         s += start;
@@ -65,7 +71,7 @@ int main(){
     File file("save.txt");
     file.load();
     std::cout << file << std::endl;
-    file.tokens.push_back("t");
+    file.tokens.push_back(" ");
     file.save();
     file.load();
     std::cout << file << std::endl;
