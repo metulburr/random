@@ -18,7 +18,8 @@ class String{
             tokens = split();
         }
         
-        std::string operator*(int num){
+        std::string 
+        operator*(int num){
             std::string s;
             for (int i=0; i<num; i++){
                 s += this->str;
@@ -26,13 +27,15 @@ class String{
             return s;
         }
         
-        bool startswith(std::string search){
+        bool 
+        startswith(std::string search){
             if ( this->str.compare(0, search.length(), search) == 0)
                 return true;
             else
                 return false;
         }
-        bool endswith(std::string search){
+        bool 
+        endswith(std::string search){
             if (search.length() > str.length())
                 return false;
             int len = str.length();
@@ -44,7 +47,8 @@ class String{
         }
         
         //split self.str into vector
-        std::vector<std::string> split(){
+        std::vector<std::string> 
+        split(){
             std::vector<std::string> v;
             std::stringstream ss(this->str);
             std::string temp;
@@ -55,8 +59,8 @@ class String{
         }
         
         //join vector of elements to one string by sep
-        template <class T>
-        std::string join(const std::vector<T> &v, std::string sep="\n"){
+        template <class T> std::string 
+        join(const std::vector<T> &v, std::string sep="\n"){
             std::string s;
             for (auto i:v){
                 s += i;
@@ -65,19 +69,22 @@ class String{
             return s;
         }
         
-        std::string upper(){
+        std::string 
+        upper(){
             std::string s = this->str;
             std::transform(s.begin(), s.end(), s.begin(), toupper);
             return s;
         }
 
-        std::string lower(){
+        std::string 
+        lower(){
             std::string s = this->str;
             std::transform(s.begin(), s.end(), s.begin(), tolower);
             return s;
         }
 
-        std::string replace(const std::string& find, const std::string& replacement) {
+        std::string 
+        replace(const std::string& find, const std::string& replacement) {
             std::string s = this->str;
             size_t pos = 0;
             while ((pos = s.find(find, pos)) != std::string::npos) {
@@ -87,7 +94,8 @@ class String{
             return s;
         }
         
-        std::string strip(const std::string &whitespace = " \t\n"){
+        std::string 
+        strip(const std::string &whitespace = " \t\n"){
             std::string s = this->str;
             const auto start = s.find_first_not_of(whitespace);
             const auto end = s.find_last_not_of(whitespace);
@@ -100,8 +108,8 @@ class String{
         }
         
         //if constructor arg is only a number, return true if between start and end, else false
-        template <class T, class U>
-        bool between(T start, U end){
+        template <class T, class U> bool 
+        between(T start, U end){
             double number;
             std::stringstream ss(this->str);
             ss >> number;
@@ -112,6 +120,13 @@ class String{
                 return false;
         }
         
+        std::string 
+        splice(std::string s, int front=0, int back=0){
+            std::string s2 = s.substr(front);
+            std::string s3 = std::string(s2.rbegin(), s2.rend()).substr(back);
+            return std::string(s3.rbegin(), s3.rend());
+        }
+                
         
         
 };
