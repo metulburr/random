@@ -20,6 +20,7 @@ clean:
 	rm *.o $(EXECUTABLE)
 
 install:
-	install -s $(EXECUTABLE) $(BINDIR)
+	#install -s $(EXECUTABLE) $(BINDIR)
+	sudo cp -u $(EXECUTABLE) $(BINDIR)
 uninstall:
-	rm $(BINDIR)/$(EXECUTABLE)
+	sudo rm $(BINDIR)/$(EXECUTABLE)
