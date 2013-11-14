@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 
-
 class Time{
     public:
         clock_t start_, end_;
