@@ -111,18 +111,18 @@ sudo pacman -S alsa-utils alsa-oss alsa-plugins pulseaudio
 alsamixer
 -> m for unmute and up arrow on first one
 sudo alsactl store
-speaker-text -c 2
+speaker-test -c 2
 
 #install fonts
-sudo pacman -S ttf-dejavu ttf-droiid ttf-cheapskate
+sudo pacman -S ttf-dejavu ttf-droid ttf-cheapskate
 
-sudo pacman -S xorg-server zorg-server-utils xorg-utils xorg-xclock xorg-twm xterm xf86-video-vesa xorg-xinit mesa mesa-demos libgl xf86-video-ati
+sudo pacman -S xorg-server xorg-server-utils xorg-utils xorg-xclock xorg-twm xterm xf86-video-vesa xorg-xinit mesa mesa-demos libgl xf86-video-ati
 startx
 #possible problems to delete conflicting files and delete and reinstall
 #left window exit 
 
 #install desktops
-sudo pacman -S gnome gnome-extras xfce4
+sudo pacman -S gnome gnome-extra xfce4
 
 xinit /usr/bin/gnome-session
 #logout
