@@ -1,0 +1,134 @@
+#create partition 
+cfdisk
+
+#create filesystem
+mkfs.<filesystem_type> /dev/sda<num>
+
+*******
+
+#create swap filesytem type
+mkswap /dev/sda<num>
+@turn swap on
+swapon /dev/sda<num>
+
+mount /dev/sda<num> /mnt
+
+#download base system
+pacstrap /mnt base base-devel vim sudo links
+
+#no windows
+pacstrap /mnt grub-bios 
+#dual boot with window
+pacstrap /mnt grub-bios os-prober
+
+#create fstab
+genfstab -p /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+
+#confirm correct and existance
+/etc/fstab
+
+#create /etc/hostname ; insert host name
+arch
+
+#set internet
+systemctl enable dhcpcd.service
+
+#add host name to end of line of localhost in /etc/hosts
+-> localhost arch
+
+#confirm existance
+/etc/resolv.conf
+
+#make backup
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+
+/etc/pacman.conf
+#uncomment TotalDownload
+#if using 64 bit, uncommnt multilib and inlcude line below it
+
+#set timezone
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+
+/etc/locale.gen
+#uncomment en_US.UTF-8 UTF-8
+locale-gen
+
+#configure kernel based on settings
+mkinitcpio -p linux
+grub-mkconfig -o /boot/grub/grub.cfg
+grub-install /dev/sda
+
+#set root password
+passwd
+
+#exit change root
+exit
+umount /mnt
+reboot
+#login with root
+
+#confirm internet
+ping google.com
+
+#add user
+useradd -m -g users -G lp,audio,video,storage,optical,scanner,games,power,network,wheel -s /bin/bash <username>
+passwd <username>
+
+visudo
+#uncomment %wheel under root (delete space before also)
+
+pacman -Syy
+pacman -Syu
+
+rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+
+
+exit
+login to username
+
+sudo pacman -Syy
+sudo pacman -Syu
+
+
+#set up pacaur
+links www.google.com
+google -> AUR -> search -> PACKAUR -> first pacaur -> download cower and pacaur
+#https://github.com/Spyhawk/pacaur/archive/4.1.21.tar.gz
+tar -xzvf pacaur.tar.gz
+tar -xzvf cower.tar.gz
+sudo pacman -S curl yajl expac
+cd cower
+makepkg -s
+sudo pacman -U *.xz
+cd ../packaur
+makepkg -s
+sudo pacman -U *.xz
+
+#set up sound
+sudo pacman -S alsa-utils alsa-oss alsa-plugins pulseaudio
+alsamixer
+-> m for unmute and up arrow on first one
+sudo alsactl store
+speaker-text -c 2
+
+#install fonts
+sudo pacman -S ttf-dejavu ttf-droiid ttf-cheapskate
+
+sudo pacman -S xorg-server zorg-server-utils xorg-utils xorg-xclock xorg-twm xterm xf86-video-vesa xorg-xinit mesa mesa-demos libgl xf86-video-ati
+startx
+#possible problems to delete conflicting files and delete and reinstall
+#left window exit 
+
+#install desktops
+sudo pacman -S gnome gnome-extras xfce4
+
+xinit /usr/bin/gnome-session
+#logout
+
+sudo systemctl enable gdm.service
+#reboot
+
+
+
