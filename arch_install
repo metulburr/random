@@ -131,4 +131,3 @@ sudo systemctl enable gdm.service
 #reboot
 
 
-
