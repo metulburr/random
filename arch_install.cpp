@@ -1,4 +1,5 @@
 
+
 #include <iostream>
 #include <vector>
 #include <sstream>
@@ -66,7 +67,7 @@ void part2(){
         "grub-mkconfig -o /boot/grub/grub.cfg",
         "grub-install /dev/sda",
         "passwd",
-        "exit"
+        //"exit" commented out for testing
         
     };
     cmds(v);
@@ -84,8 +85,8 @@ void part3(){
         "pacman -Syy",
         "pacman -Syu",
         "rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist",
-        "exit" //login to username
-    }
+        //"exit" //login to username //commented out for testing
+    };
     cmds(v);
 }
 
@@ -103,16 +104,16 @@ void part4(){
         "sudo pacman -S gnome gnome-extra xfce4",
         "xinit /usr/bin/gnome-session" //notify to logout only testing
         "sudo systemctl enable gdm.service",
-        "reboot"
+        //"reboot" //commented out for testing
         
-    }
+    };
 }
 
 int main(){
-    //part1();
-    //part2();
-    //part3();
-    //part4();
+    part1();
+    part2();
+    part3();
+    part4();
 }
 
 /*
