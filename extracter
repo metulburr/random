@@ -2,8 +2,22 @@
 
 import sys
 import subprocess
+import os
+
+
+def helper():
+    print('USAGE: ')
+    print('\t{} [compressed file]'.format(sys.argv[0]))
+    print('SUPPORTED FILETYPES: ')
+    print('\t.tar.bz2, .tar.gz, .bz2, .rar, .gz, .tar, .tbz2, .tgz, .zip, .Z, .7z')
+    print('REQUIRES: ')
+    print('\tunrar, unzip, 7z, tar, bunzip2, gunzip')
+    sys.exit()
 
 filer =  sys.argv[1]
+
+if filer in ['-h', '-help', '--help']:
+    helper()
 
 def cmd(c):
     proc = subprocess.Popen(c.split())
@@ -19,7 +33,7 @@ def convert(f):
     elif f.endswith('.rar'):
         return 'unrar x'
     elif f.endswith('.gz'):
-        return 'gunzip' 
+        return 'gunzip'
     elif f.endswith('.tar'):
         return 'tar xvf'
     elif f.endswith('.tbz2'):
@@ -32,9 +46,9 @@ def convert(f):
         return 'uncompress'
     elif f.endswith('.7z'):
         return '7z x'
-
+filename = os.path.splitext(os.path.splitext(filer)[0])[0]
         
 try:
     cmd(convert(filer) + ' ' + filer)
 except TypeError:
-    print('{} is not a valid file'.format(filer))
+    print('{} is not a valid argument [FILE, -h]'.format(filer))
