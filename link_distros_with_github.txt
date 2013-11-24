@@ -1,0 +1,2 @@
+git config --global user.name metulburr
+git config --global user.email micahpage911@yahoo.com
