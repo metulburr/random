@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <sstream>
@@ -160,7 +159,8 @@ int main(){
     
     DeepString deep("SDL_VIDEO_CENTERED=1");
     putenv(deep.str());
-    
+    //std::string win_center = "SDL_VIDEO_CENTERED=1";
+    //putenv(&win_center[0]); 
     
     
     const char *file =
