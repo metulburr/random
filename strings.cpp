@@ -131,7 +131,38 @@ class String{
         
 };
 
+
+//convert std::string to char*
+class DeepString{
+        DeepString(const DeepString& other);
+        DeepString& operator=(const DeepString& other);
+        char* internal_; 
+    public:
+        explicit DeepString( const std::string& toCopy): 
+            internal_(new char[toCopy.size()+1]) 
+        {
+            std::strcpy(internal_,toCopy.c_str());
+        }
+        ~DeepString(){ 
+            delete[] internal_; 
+        }
+        char* str() const{ 
+            return internal_;
+        }
+        const char* c_str()  const{
+            return internal_;
+        }
+};
+
+
+
 int main(){
+    
+    DeepString deep("SDL_VIDEO_CENTERED=1");
+    putenv(deep.str());
+    
+    
+    
     const char *file =
         "print \"HI\"\n"
         "nline\n"
