@@ -3,34 +3,28 @@ import random
 class Deck:
     def __init__(self):
         self.numbers = range(2,15)
-        self.suits = ['Diamonds', 'Clubs', 'Spades', 'Hearts']
-        self.deck = self.new_deck()
-    def new_deck(self):
-        d = {}
+        self.suits = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
+        self.set_deck()
+        
+    def set_deck(self, shuffle=True):
+        self.deck = []
         for suit in self.suits:
-            d[suit] = list(self.numbers)
-        return d
-    def deal_one(self):
-        while True:
-            suit = random.choice(self.suits)
-            num = random.choice(list(self.numbers))
-            try:
-                self.deck[suit].remove(num)
-            except ValueError:
-                continue
-            return (num, suit)
-    def format_display(self, num):
-        if num == 11:
-            return 'Jack'
-        elif num == 12:
-            return 'Queen'
-        elif num == 13:
-            return 'King'
-        elif num == 14:
-            return 'Ace'
+            for number in self.numbers:
+                self.deck.append((number,suit))
+        if shuffle:
+            self.shuffle()
             
+    def shuffle(self):
+        random.shuffle(self.deck)
+        
+    def deal(self):
+        if self.deck:
+            return self.deck.pop()
+        
+
+players_hand = []
 game = Deck()
-print(game.deck)
-for i in range(10):
-    print(game.deal_one())
+for i in range(5):
+    players_hand.append(game.deal())
+print(players_hand)
 print(game.deck)
