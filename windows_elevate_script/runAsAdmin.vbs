@@ -1,1 +1,1 @@
-Set objShell = CreateObject("Shell.Application") objShell.ShellExecute "C:\Python27\python", "C:\Users\metul_000\test.py", "", "runas", 1
+Set objShell = CreateObject("Shell.Application") objShell.ShellExecute WScript.Arguments.Item(0), WScript.Arguments.Item(1), "", "runas", 1
