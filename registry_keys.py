@@ -15,6 +15,7 @@ if sys.version[0] == '2':
 else:
 	import winreg as wreg
 
+#create key
 key = wreg.CreateKey(wreg.HKEY_LOCAL_MACHINE, "Software\\TestCompany\\TestProject")
 # Create new subkey
 wreg.SetValue(key, 'NewSubkey', wreg.REG_SZ, 'testsubkey')
@@ -27,7 +28,7 @@ print(wreg.QueryValueEx(key,'ValueName'))
 key.Close()
 
 
-
+#read value
 key = wreg.OpenKey(wreg.HKEY_LOCAL_MACHINE, "Software\\TestCompany\\TestProject",0,wreg.KEY_ALL_ACCESS)
 wreg.SetValue(key, 'NewSubkey', wreg.REG_SZ, 'subkey_changed')
 print(wreg.QueryValue(key, 'NewSubkey'))
@@ -35,6 +36,19 @@ print(wreg.QueryValue(key, 'NewSubkey'))
 wreg.SetValueEx(key, 'ValueName', 0, wreg.REG_SZ, 'value_changed')
 print(wreg.QueryValueEx(key, 'ValueName'))
 key.Close()
+
+
+#loop keys
+keyVal = r"Software"
+aKey = wreg.OpenKey(wreg.HKEY_LOCAL_MACHINE, keyVal, 0, wreg.KEY_ALL_ACCESS)
+try:
+    i = 0;
+    while True:
+        asubkey = wreg.EnumKey(aKey, i)
+        print(asubkey)
+        i += 1
+except WindowsError:
+    pass
 
 input('Press Enter')
 
