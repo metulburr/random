@@ -103,7 +103,6 @@ class Calendar:
         ok.grid(row=9, column=2, columnspan=3, pady=10)
         
     def kill_and_save(self):
-        print(self.values)
         self.parent.destroy()
 
 
@@ -112,15 +111,19 @@ if __name__ == '__main__':
     class Control:
         def __init__(self, parent):
             self.parent = parent
-            self.start_btn = tk.Button(self.parent, text='Start',command=self.popup)
-            self.end_btn = tk.Button(self.parent, text='End',command=self.popup)
-            self.start_btn.grid()
-            self.end_btn.grid()
+            self.choose_btn = tk.Button(self.parent, text='Choose',command=self.popup)
+            self.show_btn = tk.Button(self.parent, text='Show Selected',command=self.print_selected_date)
+            self.choose_btn.grid()
+            self.show_btn.grid()
             self.data = {}
             
         def popup(self):
             child = tk.Toplevel()
             cal = Calendar(child, self.data)
+            
+        def print_selected_date(self):
+            print(self.data)
+            
 
     root = tk.Tk()
     app = Control(root)
