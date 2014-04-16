@@ -12,7 +12,7 @@ TORRENT_URL_AMD64 = "http://releases.ubuntu.com/%s/" \
               "ubuntu-%s-desktop-amd64.iso.torrent" % (RELEASE_NO, RELEASE_NO)
 FREQ = 60 # frequency in minutes. Check for torrent file every x minutes
 SOCKET_TIMEOUT = 25
-TORRENT_FILE_PATH = os.path.abspath("ubuntu_12.04.torrent")
+TORRENT_FILE_PATH = os.path.abspath("ubuntu_14.04.torrent")
 
 
 #req = urllib2.Request(TORRENT_URL_i386) # for i386 torrent
