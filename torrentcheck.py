@@ -1,4 +1,3 @@
-
 #donwload latest ubuntu
 #python2.x or python3.x
 #pass -h argument for help
@@ -53,7 +52,7 @@ while True:
     try:
         try:
             torrent_url = urlopen(req, timeout=timeout)
-        except HTTPError:
+        except:
             time.sleep(freq*60)
             continue
         torrent_contents = torrent_url.read()
