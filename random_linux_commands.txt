@@ -1,0 +1,7 @@
+#grub control arch linux
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-install /dev/sda
+
+#grub contorl ubuntu
+sudo update-grub
+sudo grub-install /dev/sda
