@@ -1,0 +1,12 @@
+try:
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.request import urlopen
+import lxml.html
+
+code = urlopen("http://m.funtweets.com/random")
+html = lxml.html.fromstring(code.read())
+users = html.xpath('//div[@class="tweet"]/a[@class="tweet-user-link"]')
+
+for user in users:
+    print(user.text_content())
