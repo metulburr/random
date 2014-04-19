@@ -10,3 +10,17 @@ users = html.xpath('//div[@class="tweet"]/a[@class="tweet-user-link"]')
 
 for user in users:
     print(user.text_content())
+
+
+############################
+
+
+
+from lxml.html import parse
+
+html = parse('http://m.funtweets.com/random')
+for tweet in range(3, 11):
+    user = html.xpath('//html/body/div[{}]/a[1]/b/text()'.format(tweet))
+    text = html.xpath('//html/body/div[{}]/text()'.format(tweet))
+    #print(text)
+    print('@{}\n{}\n'.format(''.join(user).strip(), ''.join(text).strip()))
