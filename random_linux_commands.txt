@@ -5,3 +5,9 @@ sudo grub-install /dev/sda
 #grub contorl ubuntu
 sudo update-grub
 sudo grub-install /dev/sda
+
+
+###
+
+#ubuntu change terminal emulator
+sudo update-alternatives --config x-terminal-emulator
