@@ -11,3 +11,9 @@ sudo grub-install /dev/sda
 
 #ubuntu change terminal emulator
 sudo update-alternatives --config x-terminal-emulator
+
+
+###
+
+#get video's video/audio info
+mplayer -vo null -ao null -identify -frames 0 FILENAME.mp4
