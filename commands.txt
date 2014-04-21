@@ -29,9 +29,13 @@ ffmpeg -f concat -i inputs.txt -c copy output.mpg
 #get video's video/audio info
 mplayer -vo null -ao null -identify -frames 0 FILENAME.mp4
 
-#convert to mpeg1 for pygame, while cutting section out
+#convert to mpeg, while cutting section out
 ffmpeg -i input.mp4 -vcodec mpeg1video -acodec copy -ss 61 -t 19 output.mpeg
     #-ss starting seconds, -t new video length in seconds
+#without audio
+ffmpeg -i input.mp4 -target ntsc-vcd -vcodec mpeg1video -an output.mpg
+#with audio
+ffmpeg -i input.mp4 -vcodec mpeg1video -acodec libmp3lame -intra output.mpg
     
     
 ### secure copy
