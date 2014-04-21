@@ -21,7 +21,7 @@ ffmpeg -i input.mp4 -acodec mp3 output.mp3
 #get video's video/audio info
 mplayer -vo null -ao null -identify -frames 0 FILENAME.mp4
 
-#convert to mpeg1 for pygame
+#convert to mpeg1 for pygame, while cutting section out
 ffmpeg -i input.mp4 -vcodec mpeg1video -acodec copy -ss 61 -t 19 output.mpeg
     #-ss starting seconds, -t new video length in seconds
     
