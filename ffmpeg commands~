@@ -1,5 +1,3 @@
-#####screencasting
-
 #arch linux
 ffmpeg -f alsa -ac 1 -i plughw:0,0 -f x11grab -r 24 -s hd1080 -i :0.0 -qscale 0 NEW.mkv
 
@@ -15,6 +13,3 @@ ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 100 -s 1920x1080 -i :0.0 -acode
 ffmpeg -f alsa -ac 2 -ab 128k -i pulse -f x11grab -s 800x600 -r 30 -i :0.0+10,20 -acodec libmp3lame -vcodec mpeg4 -vtag xvid /home/metulburr/capturedvideo.avi
 
 
-
-####strip audio from video
-ffmpeg -i input.mp4 -acodec mp3 output.mp3
