@@ -32,9 +32,9 @@ mplayer -vo null -ao null -identify -frames 0 FILENAME.mp4
 #convert to mpeg, while cutting section out
 ffmpeg -i input.mp4 -vcodec mpeg1video -acodec copy -ss 61 -t 19 output.mpeg
     #-ss starting seconds, -t new video length in seconds
-#without audio
+#without audio, create pygame video
 ffmpeg -i input.mp4 -target ntsc-vcd -vcodec mpeg1video -an output.mpg
-#with audio
+#with audio, create pygame video
 ffmpeg -i input.mp4 -vcodec mpeg1video -acodec libmp3lame -intra output.mpg
     
     
