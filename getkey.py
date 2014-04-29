@@ -3,7 +3,10 @@ import sys
 if sys.platform[:3] == 'win':
     import msvcrt
     def getkey():
-        return msvcrt.getch()
+        key = msvcrt.getch()
+        if ord(key) == 224: #catch second event with arrow keys
+            key = msvcrt.getch()
+        return key
 elif sys.platform[:3] == 'lin':
     import termios, sys, os
     TERMIOS = termios
