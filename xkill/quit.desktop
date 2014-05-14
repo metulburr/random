@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=xkill
+Name=Force Quit
+Icon=/home/metulburr/.icons/bomb.png

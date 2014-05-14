@@ -1,0 +1,6 @@
+XKill for ubuntu
+
+change icon path in quit.desktop to local icon path
+copy quit.desktop to ~/.local/share/applications
+drag from applications to the unity bar
+
