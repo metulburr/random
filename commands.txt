@@ -36,6 +36,9 @@ ffmpeg -i input.mp4 -vcodec mpeg1video -acodec copy -ss 61 -t 19 output.mpeg
 ffmpeg -i input.mp4 -target ntsc-vcd -vcodec mpeg1video -an output.mpg
 #with audio, create pygame video
 ffmpeg -i input.mp4 -vcodec mpeg1video -acodec libmp3lame -intra output.mpg
+#concatenate VOB files and convert to mp4 (crf 20 for better quality, 24 for worser but smaller)
+ffmpeg -i concat:"VTS_01_1.VOB|VTS_01_2.VOB|VTS_01_3.VOB|VTS_01_4.VOB" -acodec libmp3lame -aq 100 -ac 2 -vcodec libx264 -crf 20 -threads 0 output.mp4
+
     
     
 ### secure copy
