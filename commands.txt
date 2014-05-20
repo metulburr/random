@@ -16,7 +16,7 @@ sudo update-alternatives --config x-terminal-emulator
 ### video tinkering
 
 #strip audio from video
-ffmpeg -i input.mp4 -acodec mp3 output.mp3
+ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
     #-an no audio, -vn no video
     
 #concatenate videos
