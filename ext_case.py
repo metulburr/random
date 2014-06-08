@@ -33,12 +33,12 @@ class Control:
         self.parser.add_argument(
             '-l','--lowercase', 
             action='store_true', 
-            help='Convert path extensions to lowercase'
+            help='Convert file extensions in path to lowercase'
         )
         self.parser.add_argument(
             '-u','--uppercase', 
             action='store_true', 
-            help='Convert path extensions to uppercase'
+            help='Convert file extensions in path to uppercase'
         )
         self.parser.add_argument(
             '-p', '--path', 
@@ -48,12 +48,17 @@ class Control:
         self.parser.add_argument(
             '-r', '--recursive', 
             action='store_true',
-            help='Change extensions in recursive directories'
+            help='Change files in recursive directories'
         )
         self.parser.add_argument(
             '-e', '--extensions', 
             default=self.extensions,
             help='Specify extensions to convert as a list of strings, default is {}, arguments take ext in lowercase format'.format(self.extensions)
+        )
+        self.parser.add_argument(
+            '-f', '--filename', 
+            action='store_true',
+            help='Modify filenames to match image string used to load'
         )
 
         self.args = vars(self.parser.parse_args())
@@ -67,22 +72,31 @@ class Control:
             self.case = True
         elif self.args['lowercase']:
             self.case = False
-            
+        
+        self.print_info()
+        self.handle_extensions()
+        self.handle_filenames()
+    
+    def print_info(self):
         if self.case:
             c = 'Uppercase'
         else:
             c = 'Lowercase'
         print('Path: "{}"\nCase: {}\nRecursive: {}\nExtensions: {}\n'.format(self.path, c, self.rec, self.ext))
         
+    def handle_filenames(self):
+        pass
+        
+    def handle_extensions(self):
         if self.rec:
             for root, dirs, files in os.walk(self.path):
                 for name in files:
-                    self.change_file(root, name)
+                    self.change_file_ext(root, name)
         else:
             for f in os.listdir(self.path):
-                self.change_file(self.path, f)
+                self.change_file_ext(self.path, f)
                         
-    def change_file(self, root, f):
+    def change_file_ext(self, root, f):
         base, ext = os.path.splitext(f)
         if ext[1:].lower() in self.ext:
             old = os.path.join(root, f)

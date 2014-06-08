@@ -1,0 +1,4 @@
+$ gcc -shared -o testlib.so -fPIC testlib.c
+$ sudo cp testlib.so /usr/lib
+$ python wrapper.py
+
