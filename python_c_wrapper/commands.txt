@@ -1,4 +1,4 @@
 $ gcc -shared -o testlib.so -fPIC testlib.c
-$ sudo cp testlib.so /usr/lib
+#$ sudo cp testlib.so /usr/lib # if not using ctypes.LoadLibrary()
 $ python wrapper.py
 
