@@ -1,3 +1,4 @@
+###Switch grub control
 #####grub control arch linux
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
@@ -16,7 +17,7 @@ sudo update-alternatives --config x-terminal-emulator
 ```
 
 
-###video tinkering
+###Video/Audio Editing
 
 #####strip audio from video
 #####-an no audio, -vn no video
@@ -24,7 +25,7 @@ sudo update-alternatives --config x-terminal-emulator
 ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
 ```
     
-#####concatenate videos
+#####Concatenate Videos
 #####in file inputs.txt
 ```
 file 'file1.mpg'
@@ -59,7 +60,7 @@ ffmpeg -i concat:"VTS_01_1.VOB|VTS_01_2.VOB|VTS_01_3.VOB|VTS_01_4.VOB" -acodec l
 
     
     
-###secure copy
+###Secure Copy
 
 #####copy from server to local
 ```
@@ -74,7 +75,7 @@ sudo scp -P NUM USER@IP_ADDRESS:/home/metulburr/test.py /home/metulburr
 ```
     
     
-###screencasting
+###Screencasting
 
 ####arch
 ```
@@ -93,7 +94,7 @@ ffmpeg -f alsa -ac 2 -ab 128k -i pulse -f x11grab -s 800x600 -r 30 -i :0.0+10,20
 ```
 
 
-#####IRC commands
+#####IRC Commands
 ```
 /msg nickserv identify <password>
 
