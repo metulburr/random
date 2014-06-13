@@ -1,8 +1,0 @@
-/msg nickserv identify <password>
-
-/msg chanserv info #channelname
-/msg chanserv register #channelname
-
-/msg chanserv recover #channelname
-/mode #channelname -i (get rid of invite only)
-/mode #channelname -m (get rid of muted users)

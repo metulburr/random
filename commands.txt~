@@ -63,3 +63,26 @@ ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 100 -s 1920x1080 -i :0.0 -acode
 ffmpeg -f alsa -ac 2 -i plughw:0,0 -f x11grab -r 100 -s 1920x1080 -i :0.0 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -threads 5 archinstall4.mkv
 #capture video of top-left desktop only
 ffmpeg -f alsa -ac 2 -ab 128k -i pulse -f x11grab -s 800x600 -r 30 -i :0.0+10,20 -acodec libmp3lame -vcodec mpeg4 -vtag xvid /home/metulburr/capturedvideo.avi
+
+
+#IRC commands
+/msg nickserv identify <password>
+
+/msg chanserv info #channelname
+/msg chanserv register #channelname
+
+/msg chanserv recover #channelname
+/mode #channelname -i (get rid of invite only)
+/mode #channelname -m (get rid of muted users)
+
+
+#tmux 
+#leave/join tmux with session running
+tmux detach/attach
+
+#pair two sessions
+#create a session
+tmux -S /tmp/pair
+sudo chmod 777 /tmp/pair
+#join
+tmux -S /tmp/pair attach
