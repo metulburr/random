@@ -124,3 +124,12 @@ sudo chmod 777 /tmp/pair
 ```
 tmux -S /tmp/pair attach  
 ```
+
+
+###grep
+#####recursively search files for a string
+#####-r recursive, -i ignore_case, -l list_filename
+```
+grep -ril "\bword\b" .
+
+```
