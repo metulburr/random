@@ -20,13 +20,13 @@ sudo update-alternatives --config x-terminal-emulator
 ###Video/Audio Editing
 
 #####strip audio from video
-#####-an no audio, -vn no video
+-an no audio, -vn no video
 ```
 ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
 ```
     
 #####Concatenate Videos
-#####in file inputs.txt
+in file inputs.txt
 ```
 file 'file1.mpg'
 file 'file2.mpg;
@@ -120,7 +120,7 @@ tmux -S /tmp/pair
 sudo chmod 777 /tmp/pair
 ```
 #####join a session
-#####(joiner must have permissions in directory tmux created in if somewhere else)
+(joiner must have permissions in directory tmux created in if somewhere else)
 ```
 tmux -S /tmp/pair attach  
 ```
@@ -128,7 +128,7 @@ tmux -S /tmp/pair attach
 
 ###grep
 #####recursively search files for a string
-#####-r recursive, -i ignore_case, -l list_filename
+-r recursive, -i ignore_case, -l list_filename, -H show_filename, -n show line numers
 ```
 grep -ril "\bword\b" .
 
