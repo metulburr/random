@@ -1,0 +1,21 @@
+#in arch
+sudo pacman -S bitlbee
+in file /etc/bitlbee/bitlbee.conf
+  a) uncomment RunMode = {}
+  b) uncomment User = bitlbee
+sudo chown -R bitlbee:bitlbee /var/lib/bitlbee
+sudo systemctl start bitlbee
+sudo systemctl enable bitlbee
+
+in IRC client:
+  a) make localhost server for bitlbee
+  account add jabber metulburr@chat.facebook.com <password> 
+  account 0 set nick_format %full_name 
+  account on
+
+  account add jabber metulburr@gmail.com <password> 
+  account 1 set nick_format %full_name 
+  account on
+  
+  register <password>
+#rejoin via identify <password>
