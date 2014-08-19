@@ -143,3 +143,7 @@ qdbus org.ktorrent.ktorrent /KTorrent startAll
 qdbus org.ktorrent.ktorrent /MainApplication quit
 qdbus org.ktorrent.ktorrent
 ```
+#####crontab line to start ktorrent at x time, export required
+```
+10 2 * * * export DISPLAY=:0 && ktorrent
+```
