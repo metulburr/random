@@ -133,3 +133,13 @@ tmux -S /tmp/pair attach
 grep -ril "\bword\b" .
 
 ```
+
+###DBus
+#####start/stop torrents on ktorrent
+```
+qdbus org.ktorrent.ktorrent /core startAll
+qdbus org.ktorrent.ktorrent /core stopAll
+qdbus org.ktorrent.ktorrent /KTorrent startAll
+qdbus org.ktorrent.ktorrent /MainApplication quit
+qdbus org.ktorrent.ktorrent
+```
