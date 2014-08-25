@@ -1,0 +1,39 @@
+import time, sys
+
+if sys.version[0] == '2':
+    range = xrange
+    
+def flush():
+    if sys.version[0] == '2':
+        sys.stdout.flush()
+
+
+def progressbar_num():
+    for num in range(101):
+        time.sleep(.1)
+        sys.stdout.write("\r{}%".format(num))    # or print >> sys.stdout, "\r%d%%" %i,
+        flush()
+    print('')
+
+def progressbar_disp():
+    display_char = '#'
+    for num in range(101):
+        time.sleep(.1)
+        sys.stdout.write("\r[{0}] {1}%".format(int(num/3)*display_char, num))
+        flush()
+    print('')
+
+def progressbar_disp_full():
+    display_char = '#'
+    incomplete_char = ' '
+    for num in range(101):
+        spacer = int(33-int(num/3)) * incomplete_char
+        filler = int(num/3)*display_char
+        time.sleep(.1)
+        sys.stdout.write("\r[{0}{1}] {2}%".format(filler, spacer, num))
+        flush()
+    print('')
+    
+progressbar_num()
+progressbar_disp()
+progressbar_disp_full()
