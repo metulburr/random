@@ -1,0 +1,32 @@
+Code:    Meaning:
+
+\x1b[0m  reset; clears all colors and styles (to white on black)
+\x1b[1m  bold on (see below)
+\x1b[3m  italics on
+\x1b[4m  underline on
+\x1b[7m  inverse on; reverses foreground & background colors
+\x1b[9m  strikethrough on
+\x1b[22m bold off (see below)
+\x1b[23m italics off
+\x1b[24m underline off
+\x1b[27m inverse off
+\x1b[29m strikethrough off
+\x1b[30m set foreground color to black
+\x1b[31m set foreground color to red
+\x1b[32m set foreground color to green
+\x1b[33m set foreground color to yellow
+\x1b[34m set foreground color to blue
+\x1b[35m set foreground color to magenta (purple)
+\x1b[36m set foreground color to cyan
+\x1b[37m set foreground color to white
+\x1b[39m set foreground color to default (white)
+\x1b[40m set background color to black
+\x1b[41m set background color to red
+\x1b[42m set background color to green
+\x1b[43m set background color to yellow
+\x1b[44m set background color to blue
+\x1b[45m set background color to magenta (purple)
+\x1b[46m set background color to cyan
+\x1b[47m set background color to white
+\x1b[49m set background color to default (black)
+
