@@ -17,3 +17,18 @@ git fetch upstream
 git checkout master
 git rebase upstream/master
 ```
+#new branch
+#####create branch/ and switch to branch
+```
+git checkout -b branch_name
+```
+#####add feature and push branch
+```
+git add .
+git commit -m "msg"
+git push origin branch_name
+```
+#####delete branch
+```
+git push origin :branch_name
+```
