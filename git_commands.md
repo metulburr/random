@@ -28,7 +28,7 @@ git add .
 git commit -m "msg"
 git push origin branch_name
 ```
-#####delete branch
+#####delete branch after pull request accepted
 ```
 git push origin :branch_name
 ```
