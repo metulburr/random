@@ -152,3 +152,10 @@ qdbus org.ktorrent.ktorrent
 ```
 10 2 * * * export DISPLAY=:0 && ktorrent
 ```
+
+
+#####remove bad ppas ubuntu
+```
+ls /etc/apt/sources.list.d
+sudo rm -i /etc/apt/sources.list.d/<PPA_NAME>
+```
