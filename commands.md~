@@ -24,12 +24,6 @@ sudo update-alternatives --config x-terminal-emulator
 ```
 ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
 ```
-
-#####convert video to animated gif
-```
-ffmpeg -i capturedvideo.avi -vf scale=320:-1 -r 10 -f image2pipe -vcodec ppm - | convert -delay 5 -loop 0 - output.gif
-
-```
     
 #####Concatenate Videos
 in file inputs.txt

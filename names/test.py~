@@ -1,0 +1,5 @@
+
+
+f = open('dictionary.txt')
+lines = f.readlines()
+print(lines)
