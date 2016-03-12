@@ -41,6 +41,11 @@ file 'file2.mpg;
 ffmpeg -f concat -i inputs.txt -c copy output.mpg
 ```
 
+#####current directory concatenate
+```
+ffmpeg -f concat -i <(for f in ./*.mp4; do echo "file '$PWD/$f'"; done) -c copy output.mp4
+```
+
 #####get video's video/audio info
 ```
 mplayer -vo null -ao null -identify -frames 0 FILENAME.mp4
@@ -152,4 +157,11 @@ qdbus org.ktorrent.ktorrent
 #####crontab line to start ktorrent at x time, export required
 ```
 10 2 * * * export DISPLAY=:0 && ktorrent
+```
+
+
+#####remove bad ppas ubuntu
+```
+ls /etc/apt/sources.list.d
+sudo rm -i /etc/apt/sources.list.d/<PPA_NAME>
 ```

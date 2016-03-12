@@ -27,7 +27,6 @@ class Ball:
         self.true_pos[0] += self.vel[0] * self.speed
         #self.true_pos[1] += self.vel[1] * self.speed
         self.rect.center = self.true_pos
-        print('ball center:{}, screen width:{}'.format(self.rect.center, self.screen_rect.width))
         
     def update(self, screen_rect):
         self.screen_rect = screen_rect
