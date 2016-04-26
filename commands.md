@@ -30,6 +30,15 @@ ffmpeg -i input.mp4 -acodec libmp3lame output.mp3
 ffmpeg -i capturedvideo.avi -vf scale=320:-1 -r 10 -f image2pipe -vcodec ppm - | convert -delay 5 -loop 0 - output.gif
 
 ```
+#####convert mkv to mp4 single
+```
+ffmpeg -i FILENAME.mkv -vcodec copy -acodec copy FILENAME.mp4
+```
+
+#####convert mkv to mp4 in loop of current directory
+```
+for i in *mkv; do ffmpeg -i $i -vcodec copy -acodec copy $i.mp4; done
+```
     
 #####Concatenate Videos
 in file inputs.txt
