@@ -39,6 +39,16 @@ ffmpeg -i FILENAME.mkv -vcodec copy -acodec copy FILENAME.mp4
 ```
 for i in *mkv; do ffmpeg -i $i -vcodec copy -acodec copy $i.mp4; done
 ```
+
+#####shrink video via bitrate
+```
+ffmpeg -i FILENAME.mkv -b:v 1000k -acodec copy FILENAME.mp4
+```
+
+#####shrink video via crf 0(highest quality) - 51(lowest quality)
+```
+ffmpeg -i FILENAME.mkv -vocdec libx264 -acodec copy -crf 30 FILENAME.mp4
+```
     
 #####Concatenate Videos
 in file inputs.txt
