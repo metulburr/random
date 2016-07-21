@@ -88,7 +88,8 @@ ffmpeg -i input.mp4 -vcodec mpeg1video -acodec libmp3lame -intra output.mpg
 ffmpeg -i concat:"VTS_01_1.VOB|VTS_01_2.VOB|VTS_01_3.VOB|VTS_01_4.VOB" -acodec libmp3lame -aq 100 -ac 2 -vcodec libx264 -crf 20 -threads 0 output.mp4
 ```
 
-    
+####rename files in directory from .ARW to .tiff
+rename 's/\.ARW$/\.tiff/' *.ARW
     
 ###Secure Copy
 
