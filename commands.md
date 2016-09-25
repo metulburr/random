@@ -165,6 +165,17 @@ grep -ril "\bword\b" .
 
 ```
 
+
+###sed
+#####replace in file text of all occurances
+s is used to replace the found expression "foo" with "bar"
+g stands for "global", meaning to do this for the whole line. If you leave off the g and "foo" appears twice on the same line, only the first "foo" is changed to "bar".
+-i option is used to edit in place on filename.
+-e option indicates a command to run.
+```
+sed -i -e 's/foo/bar/g' filename
+```
+
 ###DBus
 #####start/stop torrents on ktorrent
 ```
