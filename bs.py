@@ -6,7 +6,7 @@ html_doc = """
             <a href="http://example.com/tillie" class="sister june" id="link3">Tillie</a>;
             <a href="http://example.com/till" class="sister" id="link4">Till</a>;
             <a href="http://example.com/noner" class="sister" data-foo="monks">Noner</a>;
-            <b href="http://example.com/nonerb" class="sister" data-foo="monks">NonerB</b>;
+            <b href="http://example.com/nonerb" class="sister" data-foo="monks">Noner</b>;
 """
 
 soup = BeautifulSoup(html_doc, 'html.parser')
@@ -19,3 +19,12 @@ print(soup.find_all(href=re.compile("ie")))
 print(soup.find_all('a', {"data-foo": "monks"}))
 
 #any tags
+print(soup.find_all(attrs={"data-foo": "monks"}))
+
+#get a tag with text string of Lacie
+print(soup.find_all('a', string="Noner"))
+
+#get sibling(s)
+print(soup.find('a', string='Tillie').find_next_sibling())
+print(soup.find('a', string='Tillie').find_previous_sibling())
+print(soup.find('a', string='Tillie').find_previous_siblings())
