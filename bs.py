@@ -5,11 +5,17 @@ html_doc = """
             <a href="http://example.com/lacie" class="sister sister" id="link2">Lacie</a> and
             <a href="http://example.com/tillie" class="sister june" id="link3">Tillie</a>;
             <a href="http://example.com/till" class="sister" id="link4">Till</a>;
-            <a href="http://example.com/noner" class="sister" >Noner</a>;
+            <a href="http://example.com/noner" class="sister" data-foo="monks">Noner</a>;
+            <b href="http://example.com/nonerb" class="sister" data-foo="monks">NonerB</b>;
 """
 
 soup = BeautifulSoup(html_doc, 'html.parser')
 
-#find matches "sister sis*"
+#find matches "sister sis*" for class, and ie for href
 print(soup.find_all(class_=re.compile("sister sis")))
 print(soup.find_all(href=re.compile("ie")))
+
+#only tag a
+print(soup.find_all('a', {"data-foo": "monks"}))
+
+#any tags
