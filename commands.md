@@ -86,6 +86,24 @@ ffmpeg -i input.mp4 -vcodec mpeg1video -acodec libmp3lame -intra output.mpg
 #####concatenate VOB files and convert to mp4 (crf 20 for better quality, 24 for worser but smaller)
 ```
 ffmpeg -i concat:"VTS_01_1.VOB|VTS_01_2.VOB|VTS_01_3.VOB|VTS_01_4.VOB" -acodec libmp3lame -aq 100 -ac 2 -vcodec libx264 -crf 20 -threads 0 output.mp4
+
+#####sync audio files
+delay video by 3.84 seconds
+```
+ffmpeg.exe -i "movie.mp4" -itsoffset 3.84 -i "movie.mp4" -map 1:v -map 0:a -vcodec copy -acodec copy "movie-video-delayed.mp4"
+```
+delay audio by 3.84 seconds
+```
+ffmpeg.exe -i "movie.mp4" -itsoffset 3.84 -i "movie.mp4" -map 0:v -map 1:a -vcodec copy -acodec copy "movie-audio-delayed.mp4"
+
+```
+-itsoffset 3.84 -i "movie.mp4"
+Offsets timestamps of all streams by 3.84 seconds in the input file that follows the option (movie.mp4).
+
+-map 1:v -map 0:a
+Takes video stream from the second (delayed) input and audio stream from the first input - both inputs may of course be the same file. add -3.84 for hastened section. 
+
+
 ```
 
 ####rename files in directory from .ARW to .tiff
