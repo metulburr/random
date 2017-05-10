@@ -148,6 +148,7 @@ ffmpeg -f alsa -ac 2 -ab 128k -i pulse -f x11grab -s 800x600 -r 30 -i :0.0+10,20
 
 #####IRC Commands
 ```
+/nick USERNAME
 /msg nickserv identify <password>
 
 /msg chanserv info #channelname
