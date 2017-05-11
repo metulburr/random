@@ -1,0 +1,58 @@
+import sys
+from PyQt5 import QtCore, QtGui, QtWebKitWidgets, QtWidgets
+#requires package python-pyqt5.qtwebkit for QtWebKitWidgets
+
+class Browser(QtWidgets.QMainWindow):
+
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.resize(800,600)
+        self.centralwidget = QtWidgets.QWidget(self)
+
+        self.mainLayout = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.mainLayout.setSpacing(0)
+        self.mainLayout.setContentsMargins(1, 1, 1, 1)
+
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+
+        self.gridLayout = QtWidgets.QVBoxLayout(self.frame)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setSpacing(0)
+
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.tb_url = QtWidgets.QLineEdit(self.frame)
+        self.bt_back = QtWidgets.QPushButton(self.frame)
+        self.bt_ahead = QtWidgets.QPushButton(self.frame)
+
+        self.bt_back.setIcon(QtGui.QIcon().fromTheme("go-previous"))
+        self.bt_ahead.setIcon(QtGui.QIcon().fromTheme("go-next"))
+
+        self.horizontalLayout.addWidget(self.bt_back)
+        self.horizontalLayout.addWidget(self.bt_ahead)
+        self.horizontalLayout.addWidget(self.tb_url)
+        self.gridLayout.addLayout(self.horizontalLayout)
+
+        self.html = QtWebKitWidgets.QWebView()
+        self.gridLayout.addWidget(self.html)
+        self.mainLayout.addWidget(self.frame)
+        self.setCentralWidget(self.centralwidget)
+
+        self.tb_url.returnPressed.connect(self.browse)
+        self.bt_back.clicked.connect(self.html.back)
+        self.bt_ahead.clicked.connect(self.html.forward)
+
+        self.default_url = "http://www.google.com/webhp?complete=0&hl=en"
+        self.tb_url.setText(self.default_url)
+        self.browse()
+
+    def browse(self):
+        url = self.tb_url.text() if self.tb_url.text() else self.default_url
+        self.html.load(QtCore.QUrl(url))
+        self.html.show()
+
+if __name__ == "__main__":
+
+    app = QtWidgets.QApplication(sys.argv)
+    main = Browser()
+    main.show()
+sys.exit(app.exec_())
