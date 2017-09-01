@@ -1,0 +1,22 @@
+from datetime import datetime
+data = '''INC3270235|Most of these are blank|0|Error messages go here|3|700000120|5/6/17 3:20|5/6/17 15:20
+INC3271723|Most of these are blank|0|Error messages go here|3|700000120|5/7/17 9:43|5/7/17 9:43
+INC3279067|Most of these are blank|0|Error messages go here|3|700000120|5/8/17 9:03|5/8/17 9:03
+INC3319147|Most of these are blank|0|Error messages go here|3|700000120|5/11/17 1:24|5/11/17 1:24
+INC3331818|Most of these are blank|0|Error messages go here|3|700000120|5/11/17 3:21|5/11/17 15:21
+INC3331966|Most of these are blank|0|Error messages go here|3|700000120|5/11/17 3:31|5/11/17 15:31
+INC3335862|Most of these are blank|0|Error messages go here|3|700000120|5/12/17 6:17|5/12/17 6:17
+INC3344128|Most of these are blank|0|Error messages go here|3|700000120|5/12/17 3:11|5/12/17 15:11
+INC3368733|Most of these are blank|0|Error messages go here|3|700000120|5/16/17 1:24|5/16/17 1:24'''
+
+
+dates = []
+for line in data.split('\n'):
+    last_element = line.split('|')[-1]  #5/6/17 15:20
+    dates.append(datetime.strptime(last_element, '%m/%d/%y %H:%M')) #http://strftime.org/
+
+
+for date in dates:
+    print('day of the year: {}'.format(date.timetuple().tm_yday))
+    print('week of the month: {}'.format((date.day - 1) // 7 + 1))
+    print('week number of the year: {}'.format(date.isocalendar()[1]))
