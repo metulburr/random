@@ -1,0 +1,102 @@
+
+from selenium import webdriver
+import time
+import os
+
+URL = 'https://www.facebook.com/'
+CHROMEPATH = '/home/metulburr/chromedriver'
+PHANTOMPATH = '/home/metulburr/phantomjs'
+EMAIL = ''
+PASSWORD = ''
+
+class App:
+	def __init__(self):
+		self.setup_chrome()
+		#self.setup_headless()
+		self.login()
+		self.to_home()
+		self.to_friends()
+		
+		#test
+		friend_name = self.browser.find_element_by_id('fb-timeline-cover-name')
+		print(friend_name.text)
+ 
+		more_about = str('More About ' + str(friend_name.text))
+		print(more_about)
+		self.scroll_to_bottom()
+		'''
+		while True:
+			self.browser.execute_script('window.scrollTo(0, document.body.scrollHeight);')
+			time.sleep(1)
+		'''
+		print('done')
+		
+		time.sleep(100000) #keep alive to view html
+		
+	def scroll_to_bottom(self):
+		driver = self.browser
+		SCROLL_PAUSE_TIME = 0.5
+		# Get scroll height
+		last_height = driver.execute_script("return document.body.scrollHeight")
+
+		while True:
+			# Scroll down to bottom
+			driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+			# Wait to load page
+			time.sleep(SCROLL_PAUSE_TIME)
+
+			# Calculate new scroll height and compare with last scroll height
+			new_height = driver.execute_script("return document.body.scrollHeight")
+			if new_height == last_height:
+				break
+			last_height = new_height
+		
+	def delay(self):
+		time.sleep(3)
+	
+	def chrome_prep(self):
+		'''get rid of asking to save password and notifications popup'''
+		chrome_options = webdriver.ChromeOptions()
+		chrome_options.add_experimental_option(
+			'prefs', {
+				'credentials_enable_service': False,
+				"profile.default_content_setting_values.notifications" : 2,
+				'profile': {
+					'password_manager_enabled': False
+				}
+			}
+		)
+		return chrome_options
+		
+	def setup_chrome(self):
+		options = self.chrome_prep()
+		os.environ["webdriver.chrome.driver"] = CHROMEPATH
+		self.browser = webdriver.Chrome(CHROMEPATH, chrome_options=options)
+		self.browser.set_window_position(0,0)
+		self.delay()
+		
+	def setup_headless(self):
+		self.browser = webdriver.PhantomJS(PHANTOMPATH)
+		self.delay()
+		
+	def login(self):
+		self.browser.get(URL) 
+		time.sleep(1) 
+		username = self.browser.find_element_by_id("email")
+		password = self.browser.find_element_by_id("pass")
+		username.send_keys(EMAIL)
+		password.send_keys(PASSWORD)
+		login_attempt = self.browser.find_element_by_xpath("//*[@type='submit']")
+		login_attempt.submit()
+		self.delay()
+		
+	def to_home(self):
+		self.browser.execute_script("document.getElementsByClassName('linkWrap noCount')[0].click()")
+		self.delay()
+	
+	def to_friends(self):
+		self.browser.execute_script("document.getElementsByClassName('_6-6')[2].click()")
+		self.delay()
+		
+App()
