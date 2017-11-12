@@ -144,6 +144,32 @@ ffmpeg -f x11grab -r 50 -s 1920x1080 -i :0.0 -acodec pcm_s16le -vcodec libx264 -
 ```
 ffmpeg -f alsa -ac 2 -ab 128k -i pulse -f x11grab -s 800x600 -r 30 -i :0.0+10,20 -acodec libmp3lame -vcodec mpeg4 -vtag xvid /home/metulburr/capturedvideo.avi
 ```
+#####capture window
+run desired window to get windo info on it
+```
+xwininfo
+```
+will output something like
+```
+metulburr@ubuntu:~$ xwininfo
+...
+
+  Absolute upper-left X:  0
+  Absolute upper-left Y:  680
+  Relative upper-left X:  0
+  Relative upper-left Y:  0
+  Width: 600
+  Height: 400
+...
+```
+then pass these to ffmpeg in the form of
+-s 600x400 -i :0.0+0,680
+to get the total of
+```
+ffmpeg -f x11grab -r 50 -s 600x400 -i :0.0+0,680 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -threads 5 captured.mkv
+```
+
+
 
 
 #####IRC Commands
