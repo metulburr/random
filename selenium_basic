@@ -1,3 +1,79 @@
+[url=https://selenium-python.readthedocs.io/waits.html]selenium waits[/url]
+[url=https://selenium-python.readthedocs.io/locating-elements.html]locating elements[/url]
+[url=https://seleniumhq.github.io/selenium/docs/api/py/webdriver/selenium.webdriver.common.by.html]By locators[/url]
+
+
+
+###selenium wait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+...
+WebDriverWait(browser, 3).until(EC.presence_of_element_located((By.ID, 'global-new-tweet-button')))
+
+
+
+
+###headless
+options = Options()
+options.add_argument("--headless")
+browser = webdriver.Chrome(chromedriver, chrome_options=options)
+
+
+
+
+###scroll to bottom of page
+def scroll_to_bottom(driver):
+    driver = self.browser
+    SCROLL_PAUSE_TIME = 0.5
+    # Get scroll height
+    last_height = driver.execute_script("return document.body.scrollHeight")
+
+    while True:
+        # Scroll down to bottom
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # Wait to load page
+        time.sleep(SCROLL_PAUSE_TIME)
+
+        # Calculate new scroll height and compare with last scroll height
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+	
+	
+	
+	
+	
+
+####remove popup for asking to save password
+    def chrome_prep(self):
+        '''get rid of asking to save password and notifications popup'''
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option(
+            'prefs', {
+                'credentials_enable_service': False,
+                "profile.default_content_setting_values.notifications" : 2,
+                'profile': {
+                    'password_manager_enabled': False
+                }
+            }
+        )
+        return chrome_options
+         
+    def setup_chrome(self):
+        options = self.chrome_prep()
+        self.browser = webdriver.Chrome(CHROMEPATH, chrome_options=options)
+	
+	
+
+
+
+
+
+
 from selenium import webdriver
 import time
 import os
