@@ -1,0 +1,22 @@
+#linux only
+#install xte
+#sudo apt-get install xautomation
+#mainly used to save page as in firefox to get all code, download CSS, JS, images, etc. as selenium cant push system buttons
+#https://python-forum.io/Thread-Web-scraping-selenium-i-think?pid=69896#pid69896
+
+
+from subprocess import Popen, PIPE
+ 
+save_sequence = b"""keydown Control_L
+key S
+keyup Control_L
+keydown Return
+keyup Return
+"""
+ 
+ 
+def keypress(sequence):
+    p = Popen(['xte'], stdin=PIPE)
+    p.communicate(input=sequence)
+ 
+keypress(save_sequence)
