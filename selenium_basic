@@ -14,6 +14,13 @@ WebDriverWait(browser, 3).until(EC.presence_of_element_located((By.ID, 'global-n
 
 
 
+###selenium push keys
+#options: https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.common.action_chains
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+...
+ActionChains(browser).key_down(Keys.COMMAND).send_keys("s").key_up(Keys.COMMAND).perform()
+
 
 ###headless
 options = Options()
