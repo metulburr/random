@@ -11,7 +11,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 ...
 WebDriverWait(browser, 3).until(EC.presence_of_element_located((By.ID, 'global-new-tweet-button')))
-
+  
+  
+  
+  
 
 
 ###selenium push keys
@@ -22,10 +25,17 @@ from selenium.webdriver.common.keys import Keys
 ActionChains(browser).key_down(Keys.COMMAND).send_keys("s").key_up(Keys.COMMAND).perform()
 
 
+
+
+
+
 ###headless
 options = Options()
 options.add_argument("--headless")
 browser = webdriver.Chrome(chromedriver, chrome_options=options)
+
+
+
 
 
 
@@ -74,6 +84,53 @@ def scroll_to_bottom(driver):
         options = self.chrome_prep()
         self.browser = webdriver.Chrome(CHROMEPATH, chrome_options=options)
 	
+
+
+
+
+
+
+
+
+###switch tabs
+# Opens a new tab
+self.driver.execute_script("window.open()")
+
+# Switch to the newly opened tab
+self.driver.switch_to.window(self.driver.window_handles[1])
+
+# Navigate to new URL in new tab
+self.driver.get("https://google.com")
+# Run other commands in the new tab here
+
+You're then able to close the original tab as follows
+
+# Switch to original tab
+self.driver.switch_to.window(self.driver.window_handles[0])
+
+# Close original tab
+self.driver.close()
+
+# Switch back to newly opened tab, which is now in position 0
+self.driver.switch_to.window(self.driver.window_handles[0])
+
+Or close the newly opened tab
+
+# Close current tab
+self.driver.close()
+
+# Switch back to original tab
+self.driver.switch_to.window(self.driver.window_handles[0])
+
+
+
+
+
+
+
+
+
+
 	
 
 
