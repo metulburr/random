@@ -243,4 +243,29 @@ qdbus org.ktorrent.ktorrent
 ```
 ls /etc/apt/sources.list.d
 sudo rm -i /etc/apt/sources.list.d/<PPA_NAME>
+
+
+#####format USB wont work, read only ,etc.
+ A. First we need to delete the old partitions that remain on the USB key.
+
+Open a terminal and type sudo su
+Type fdisk -l and note your USB drive letter.
+Type fdisk /dev/sdx (replacing x with your drive letter)
+Type d to proceed to delete a partition
+Type 1 to select the 1st partition and press enter
+Type d to proceed to delete another partition (fdisk should automatically select the second partition)
+
+B. Next we need to create the new partition.
+
+Type n to make a new partition
+Type p to make this partition primary and press enter
+Type 1 to make this the first partition and then press enter
+Press enter to accept the default first cylinder
+Press enter again to accept the default last cylinder
+Type w to write the new partition information to the USB key
+Type umount /dev/sdx1 (replacing x with your drive letter)
+
+C. The last step is to create the fat filesystem.
+
+Type mkfs.vfat -F 32 /dev/sdx1 (replacing x with your USB key drive letter)
 ```
