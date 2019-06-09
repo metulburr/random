@@ -37,3 +37,41 @@ def progressbar_disp_full():
 progressbar_num()
 progressbar_disp()
 progressbar_disp_full()
+
+
+
+####################################
+#insert progress value sparadically throughout script
+
+import sys
+import time
+
+
+def progress(count, suffix='', total=100, complete='=', incomplete='-', bar_len=60):
+    filled_len = int(round(bar_len * count / float(total)))
+
+    percents = round(100.0 * count / float(total), 1)
+    bar = complete * filled_len + incomplete * (bar_len - filled_len)
+
+    sys.stdout.write(f'[{bar}] {percents}% ...{suffix}\r')
+    sys.stdout.flush()  
+    
+def task():
+    time.sleep(1)
+    
+def script():
+    progress(0,'running task 1')
+    task()
+    progress(20,'running task 2')
+    task()
+    progress(40,'running task 3')
+    task()
+    progress(60,'running task 4')
+    task()
+    progress(80,'running task 5')
+    task()
+    progress(100, '   complete   ')
+    
+    
+script()
+
