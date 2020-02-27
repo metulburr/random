@@ -1,7 +1,9 @@
 ####zero SD card
 
 sudo fdisk -l
+
 sudo mkfs.ntfs /dev/sdX1
+
 sudo mkfs.vfat /dev/sdX1
 
 
