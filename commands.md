@@ -1,5 +1,9 @@
 ####zero SD card
 ```
+sudo dd if=/dev/zero of=/dev/sdb
+```
+###format sd card
+```
 sudo fdisk -l
 sudo mkfs.ntfs /dev/sdX1
 sudo mkfs.vfat /dev/sdX1
