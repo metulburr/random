@@ -2,6 +2,11 @@
 ```
 sudo dd if=/dev/zero of=/dev/sdb
 ```
+####make partition table, n (new) enter through and w to write
+```
+sudo fdisk /dev/sdX
+```
+
 ###format sd card
 ```
 sudo fdisk -l
