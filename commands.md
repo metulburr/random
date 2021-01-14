@@ -1,8 +1,11 @@
 ####scanner/printer
 
 sudo apt-get install sane sane-utils
+
 make sure print is on
+
 scanimage -L   #make sure device is listed
+
 scanimage --format=png > output.png
 
 
